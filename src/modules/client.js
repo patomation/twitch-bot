@@ -1,4 +1,4 @@
-const tmi = require('tmi.js');
+const tmi = require('tmi.js')
 
 const opts = {
   identity: {
@@ -8,8 +8,8 @@ const opts = {
   channels: [
     process.env.CHANNEL_NAME
   ]
-};
+}
 
-const client = new tmi.client(opts);
+const client = new tmi.client(opts)
 
-module.exports=client
+module.exports = client
