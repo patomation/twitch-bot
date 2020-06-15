@@ -1,15 +1,27 @@
-const executeCommand = (client, target, command) => {
-  const commands = {
-    d20: () => {
-      client.say(target, `You rolled a ${20}.`)
+const executeCommand = (client, target, context, commandName) => {
+  const availableCommands = {
+    commands: () => {
+      let message = 'Available Commands: '
+      Object.keys(availableCommands).forEach((command) => {
+        // Ignore this command
+        if (command !== 'commands') {
+          message += `!${command} `
+        }
+      })
+      client.say(target, `${message}`)
+    },
+    hello: () => {
+      client.say(target, `Hello ${context.username}!`)
     }
   }
 
-  if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    commands[command]()
-    console.log(`* Executed !${command} command`)
+  const isCommand = Object.prototype.hasOwnProperty.call(availableCommands, commandName)
+
+  if (isCommand) {
+    availableCommands[commandName]()
+    console.log(`* Executed !${commandName} command`)
   } else {
-    console.log(`* Unknown command !${command}`)
+    console.log(`* Unknown command !${commandName}`)
   }
 }
 

@@ -10,7 +10,7 @@ client.on('connected', (addr, port) => {
 client.on('message', (target, context, msg, self) => {
   if (self) { return } // Ignore messages from the bot
   const command = msg.trim().replace('!', '')
-  executeCommand(client, target, command)
+  executeCommand(client, target, context, command)
 })
 
 client.connect()
