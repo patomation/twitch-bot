@@ -1,5 +1,6 @@
 const say = require('say')
 const badWordsRegExp = require('badwords/regexp')
+const upTime = require('./upTime')
 
 const beerMl = 0
 
@@ -26,6 +27,10 @@ const executeCommand = (client, target, context, commandName) => {
         }
       })
       client.whisper(context.username, `${message}`)
+    },
+    uptime: async () => {
+      const upTimeMin = await upTime()
+      client.say(target, `AdVolKit has been streaming for ${upTimeMin} min`)
     },
     hello: () => {
       client.say(target, `Hello ${context.username}!`)
@@ -56,6 +61,12 @@ const executeCommand = (client, target, context, commandName) => {
     },
     vscodetheme: () => {
       client.say(target, 'SynthWave 84 | https://github.com/robb0wen/synthwave-vscode')
+    },
+    match3hell: () => {
+      client.say(target, 'Match3hell dev: https://match3hell.com/ itch: https://advolkit.itch.io/match3hell?dev=true ')
+    },
+    botsource: () => {
+      client.say(target, 'See my insides: https://github.com/patomation/twitch-bot')
     }
   }
 
@@ -66,9 +77,12 @@ const executeCommand = (client, target, context, commandName) => {
     console.log(`* Executed !${commandName} command`)
   } else {
     // User is saying something
-    const message = commandName.replace(badWordsRegExp, 'expletive')
-    console.log(`* Unknown command !${commandName}`)
-    say.speak(`${context.username} says ${message}`)
+    const voiceMessage = commandName.replace(badWordsRegExp, 'expletive')
+    const textMessage = commandName.replace(badWordsRegExp, '****')
+    // console.log(`* Unknown command !${commandName}`)
+    console.log(`${context.username}: ${textMessage}`)
+
+    say.speak(`${context.username} says ${voiceMessage}`)
   }
 }
 

@@ -6,3 +6,4 @@ coverage
 *\ copy*
 .~lock.*.ods#
 .env
+data.json

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/bot.js",
+    "start": "nodemon ./src/bot.js --watch src",
     "lint": "./node_modules/.bin/eslint **/*.{js,ts,tsx}",
     "test": "ava",
     "coverage": "nyc ava"

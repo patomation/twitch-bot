@@ -35,3 +35,5 @@ sudo apt-get install festival festvox-kallpc16k
 ```
 
 Source: https://github.com/marak/say.js/
+
+[funny_texttospeak_lines](https://old.reddit.com/r/discordapp/comments/5nu2em/funny_texttospeak_lines/)
