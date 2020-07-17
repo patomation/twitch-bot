@@ -7,6 +7,7 @@ const badWordsRegExp = require('badwords/regexp')
 const file = require('./modules/file')
 const isSameDay = require('./modules/isSameDay')
 const upTime = require('./modules/upTime')
+const { urlRegExPattern } = require('./modules/isUrl')
 // Stamp the data.json startTime with a new date each time.
 // So we can calculate up time
 const dataFilePath = './data.json'
@@ -32,20 +33,23 @@ upTime()
 
 client.on('connected', (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`)
-  // say.speak('chat bot systems ACTIVATED')
+  say.speak('beep boop')
 })
 
 client.on('message', (target, context, msg, self) => {
+  const message = msg.trim()
   if (self) { return } // Ignore messages from the bot
-  const isCommand = msg.trim().charAt(0) === '!'
+  const isCommand = message.charAt(0) === '!'
   if (isCommand) {
-    const command = msg.trim().replace('!', '')
+    const command = message.replace('!', '')
     executeCommand(client, target, context, command)
   // Handle Messages
   } else {
     // User is saying something
-    const voiceMessage = msg.trim().replace(badWordsRegExp, 'expletive')
-    const textMessage = msg.trim().replace(badWordsRegExp, '****')
+    const voiceMessage = message
+      .replace(badWordsRegExp, 'expletive')
+      .replace(urlRegExPattern, '')
+    const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
 
     say.speak(`${context.username} says ${voiceMessage}`)
