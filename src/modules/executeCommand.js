@@ -4,13 +4,13 @@ const upTime = require('./upTime')
 
 const beerMl = 0
 
+// -----------
+// GMTK Game Jam 2020
+// - July 10th - deadline: 48hr
+// https://itch.io/jam/gmtk-2020
+// -----------
 const gameJamContent = () => `
 Up Coming Game JAMS:
- -----------
-GMTK Game Jam 2020
- - July 10th - deadline: 48hr
-https://itch.io/jam/gmtk-2020
- -----------
 js13kgames
  - 13:00 CEST, 13th August - deadline: 1mth
 http://js13kgames.com
@@ -30,7 +30,9 @@ const executeCommand = (client, target, context, commandName) => {
     },
     uptime: async () => {
       const upTimeMin = await upTime()
-      client.say(target, `AdVolKit has been streaming for ${upTimeMin} min`)
+      const hours = Math.floor(upTimeMin / 60)
+      const min = Math.round(((upTimeMin / 60) - hours) * 60)
+      client.say(target, `AdVolKit has been streaming for ${hours} hours and ${min} min`)
     },
     hello: () => {
       client.say(target, `Hello ${context.username}!`)
