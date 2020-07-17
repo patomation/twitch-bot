@@ -1,5 +1,3 @@
-const say = require('say')
-const badWordsRegExp = require('badwords/regexp')
 const upTime = require('./upTime')
 
 const beerMl = 0
@@ -72,19 +70,13 @@ const executeCommand = (client, target, context, commandName) => {
     }
   }
 
-  const isCommand = Object.prototype.hasOwnProperty.call(availableCommands, commandName)
+  const hasCommand = Object.prototype.hasOwnProperty.call(availableCommands, commandName)
 
-  if (isCommand) {
+  if (hasCommand) {
     availableCommands[commandName]()
     console.log(`* Executed !${commandName} command`)
   } else {
-    // User is saying something
-    const voiceMessage = commandName.replace(badWordsRegExp, 'expletive')
-    const textMessage = commandName.replace(badWordsRegExp, '****')
-    // console.log(`* Unknown command !${commandName}`)
-    console.log(`${context.username}: ${textMessage}`)
-
-    say.speak(`${context.username} says ${voiceMessage}`)
+    console.log(`* Unknown command !${commandName}`)
   }
 }
 
