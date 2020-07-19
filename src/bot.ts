@@ -1,27 +1,26 @@
-const dotenv = require('dotenv')
-dotenv.config()
-const client = require('./modules/client')
-const executeCommand = require('./modules/executeCommand')
-const say = require('say')
-const badWordsRegExp = require('badwords/regexp')
-const file = require('./modules/file')
-const isSameDay = require('./modules/isSameDay')
-const upTime = require('./modules/upTime')
+import 'dotenv/config'
+import { client } from './modules/client'
+import executeCommand from './modules/executeCommand'
+import badWordsRegExp from 'badwords/regexp'
+import { exists, readJson, writeJson } from './modules/file'
+import isSameDay from './modules/isSameDay'
+import upTime from './modules/upTime'
+import vox from './modules/vox'
 // Stamp the data.json startTime with a new date each time.
 // So we can calculate up time
 const dataFilePath = './data.json'
 const setUpTimeDateStamp = async () => {
-  const dataExists = await file.exists(dataFilePath)
+  const dataExists = await exists(dataFilePath)
   if (!dataExists) {
-    await file.writeJson(dataFilePath, {
+    await writeJson(dataFilePath, {
       startTime: new Date()
     })
   } else {
-    const data = await file.readJson(dataFilePath)
+    const data = await readJson(dataFilePath)
     const { startTime } = data
-    if (!isSameDay(new Date(startTime), new Date())) {
+    if (!isSameDay(new Date(startTime as string), new Date())) {
       // make a new stamp for today
-      await file.writeJson(dataFilePath, {
+      await writeJson(dataFilePath, {
         startTime: new Date()
       })
     }
@@ -32,7 +31,7 @@ upTime()
 
 client.on('connected', (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`)
-  say.speak('beep boop')
+  vox('beep boop')
 })
 
 client.on('message', (target, context, msg, self) => {

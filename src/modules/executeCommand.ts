@@ -1,5 +1,6 @@
-const upTime = require('./upTime')
-const vox = require('./vox')
+import upTime from './upTime'
+import vox from './vox'
+import { Client, Context } from './client'
 
 const beerMl = 0
 
@@ -15,7 +16,12 @@ js13kgames
 http://js13kgames.com
 `
 
-const executeCommand = (client, target, context, commandString) => {
+const executeCommand = (
+  client: Client,
+  target: string,
+  context: Context,
+  commandString: string
+): void => {
   const availableCommands = {
     commands: () => {
       let message = 'Available Commands: '
@@ -38,6 +44,10 @@ const executeCommand = (client, target, context, commandString) => {
     },
     beer: () => {
       client.say(target, `${beerMl} ml of Beer consumed`)
+    },
+    isPatDrinking: () => {
+      const isPatDrinking = false
+      client.say(target, `const [drinking, setDrinking] = useState<boolean>(${isPatDrinking})`)
     },
     salt: () => {
       client.say(target, 'SALTY SALTY')
@@ -75,7 +85,7 @@ const executeCommand = (client, target, context, commandString) => {
     vox: (message) => {
       vox(`${context.username} says ${message}`)
     },
-    hype: (message) => {
+    hype: () => {
       vox('HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE')
     },
     laugh: () => {
@@ -94,4 +104,4 @@ const executeCommand = (client, target, context, commandString) => {
   }
 }
 
-module.exports = executeCommand
+export default executeCommand
