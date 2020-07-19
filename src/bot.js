@@ -7,7 +7,6 @@ const badWordsRegExp = require('badwords/regexp')
 const file = require('./modules/file')
 const isSameDay = require('./modules/isSameDay')
 const upTime = require('./modules/upTime')
-const { urlRegExPattern } = require('./modules/isUrl')
 // Stamp the data.json startTime with a new date each time.
 // So we can calculate up time
 const dataFilePath = './data.json'
@@ -46,13 +45,8 @@ client.on('message', (target, context, msg, self) => {
   // Handle Messages
   } else {
     // User is saying something
-    const voiceMessage = message
-      .replace(badWordsRegExp, 'expletive')
-      .replace(urlRegExPattern, '')
     const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
-
-    say.speak(`${context.username} says ${voiceMessage}`)
   }
   // Handle Emoticons
 })

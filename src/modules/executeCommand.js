@@ -1,4 +1,5 @@
 const upTime = require('./upTime')
+const vox = require('./vox')
 
 const beerMl = 0
 
@@ -14,7 +15,7 @@ js13kgames
 http://js13kgames.com
 `
 
-const executeCommand = (client, target, context, commandName) => {
+const executeCommand = (client, target, context, commandString) => {
   const availableCommands = {
     commands: () => {
       let message = 'Available Commands: '
@@ -65,15 +66,28 @@ const executeCommand = (client, target, context, commandName) => {
     match3hell: () => {
       client.say(target, 'Match3hell dev: https://match3hell.com/ itch: https://advolkit.itch.io/match3hell?dev=true ')
     },
+    game: () => {
+      client.say(target, 'The game is match3Hell: https://advolkit.itch.io/match3hell')
+    },
     botsource: () => {
       client.say(target, 'See my insides: https://github.com/patomation/twitch-bot')
+    },
+    vox: (message) => {
+      vox(`${context.username} says ${message}`)
+    },
+    hype: (message) => {
+      vox('HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE HYPE')
+    },
+    laugh: () => {
+      vox(':e: :e: :e: :o: :o: :o: :a: :a: :a: :a:')
     }
   }
-
+  const commandName = commandString.split(' ')[0]
+  const args = commandString.replace(commandName + ' ', '')
   const hasCommand = Object.prototype.hasOwnProperty.call(availableCommands, commandName)
-
+  console.log('commandName', commandName)
   if (hasCommand) {
-    availableCommands[commandName]()
+    availableCommands[commandName](args)
     console.log(`* Executed !${commandName} command`)
   } else {
     console.log(`* Unknown command !${commandName}`)
