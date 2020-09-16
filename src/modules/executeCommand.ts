@@ -55,6 +55,9 @@ const executeCommand = (
     gamejams: () => {
       client.say(target, gameJamContent())
     },
+    github: () => {
+      client.say(target, 'https://github.com/patomation/')
+    },
     discord: () => {
       client.say(target, 'https://discord.gg/ttbJuve')
     },
