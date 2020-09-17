@@ -79,6 +79,9 @@ const executeCommand = (
     match3hell: () => {
       client.say(target, 'Match3hell dev: https://match3hell.com/ itch: https://advolkit.itch.io/match3hell?dev=true ')
     },
+    multitwitch: () => {
+      client.say(target, 'http://multitwitch.tv/advolkit/mightyiam')
+    },
     game: () => {
       client.say(target, 'The game is match3Hell: https://advolkit.itch.io/match3hell')
     },
