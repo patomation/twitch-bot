@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start2": "nodemon ./src/bot.js --watch src",
-    "start": "ts-node-dev ./src/bot.ts --watch src",
+    "start": "ts-node-dev ./src/bot/bot.ts --watch src/bot",
     "lint": "./node_modules/.bin/eslint **/*.{js,ts,tsx}",
     "test": "ava",
     "coverage": "nyc ava"
