@@ -73,7 +73,7 @@ const executeCommand = (
     instagram: () => {
       client.say(target, 'https://www.instagram.com/advolkit/')
     },
-    vscodetheme: () => {
+    theme: () => {
       client.say(target, 'SynthWave 84 | https://github.com/robb0wen/synthwave-vscode')
     },
     match3hell: () => {
@@ -81,6 +81,9 @@ const executeCommand = (
     },
     multitwitch: () => {
       client.say(target, 'http://multitwitch.tv/advolkit/mightyiam')
+    },
+    mightyiam: () => {
+      client.say(target, 'https://twitch.tv/mightyiam')
     },
     game: () => {
       client.say(target, 'The game is match3Hell: https://advolkit.itch.io/match3hell')
