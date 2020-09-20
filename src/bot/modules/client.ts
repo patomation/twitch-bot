@@ -1,4 +1,4 @@
-import * as tmi from 'tmi.js'
+import tmi from 'tmi.js'
 
 const opts = {
   identity: {
@@ -23,10 +23,12 @@ export type Callback = (
 ) => void
 
 export interface Client {
-  on?: (key: string, callback: Callback) => void
-  connect?: () => void,
-  say?: (targetRoom: string, message: string) => void,
-  whisper?: (targetUser: string, message: string) => void
+  on: (key: string, callback: Callback) => void
+  connect: () => void,
+  say: (targetRoom: string, message: string) => void,
+  whisper: (targetUser: string, message: string) => void
 }
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 // eslint-disable-next-line new-cap
 export const client = new tmi.client(opts) as Client

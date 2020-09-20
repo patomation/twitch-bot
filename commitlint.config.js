@@ -6,7 +6,8 @@ module.exports = {
     'scope-empty': [2, 'never'],
     'scope-enum': [2, 'always', [
       'bot',
-      'command'
+      'command',
+      'typescript'
     ]]
   }
 }

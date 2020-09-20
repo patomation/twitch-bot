@@ -84,7 +84,7 @@ const executeCommand = (
     botsource: () => {
       client.say(target, 'See my insides: https://github.com/patomation/twitch-bot')
     },
-    vox: (message) => {
+    vox: (message: string) => {
       vox(`${context.username} says ${message}`)
     },
     hype: () => {
@@ -99,6 +99,8 @@ const executeCommand = (
   const hasCommand = Object.prototype.hasOwnProperty.call(availableCommands, commandName)
   console.log('commandName', commandName)
   if (hasCommand) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     availableCommands[commandName](args)
     console.log(`* Executed !${commandName} command`)
   } else {
