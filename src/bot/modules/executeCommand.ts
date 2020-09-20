@@ -1,4 +1,3 @@
-import upTime from './upTime'
 import vox from './vox'
 import { Client, Context } from './client'
 
@@ -32,12 +31,6 @@ const executeCommand = (
         }
       })
       client.whisper(context.username, `${message}`)
-    },
-    uptime: async () => {
-      const upTimeMin = await upTime()
-      const hours = Math.floor(upTimeMin / 60)
-      const min = Math.round(((upTimeMin / 60) - hours) * 60)
-      client.say(target, `AdVolKit has been streaming for ${hours} hours and ${min} min`)
     },
     hello: () => {
       client.say(target, `Hello ${context.username}!`)
