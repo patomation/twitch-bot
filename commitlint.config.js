@@ -6,6 +6,7 @@ module.exports = {
     'scope-empty': [2, 'never'],
     'scope-enum': [2, 'always', [
       'bot',
+      'client',
       'command',
       'eslint',
       'overlay',

@@ -9,7 +9,6 @@ const opts = {
     process.env.CHANNEL_NAME
   ]
 }
-console.log(opts)
 
 export interface Context {
   username: string
