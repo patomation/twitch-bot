@@ -19,3 +19,10 @@ const vnode = h('div', 'overlay')
 
 // Patch into empty DOM element – this modifies the DOM as a side effect
 patch(container, vnode)
+
+const eventSource = new EventSource('http://0.0.0.0:4001/connect')
+
+eventSource.onmessage = (e) => {
+  const data = JSON.parse(e.data)
+  console.log(data)
+}
