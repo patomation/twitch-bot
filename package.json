@@ -9,7 +9,7 @@
     "start:bot": "nodemon ./build/bot/bot.js --watch build/bot",
     "compile:overlay": "tsc --build ./src/overlay/tsconfig.json --watch",
     "start:overlay": "webpack-dev-server --open --hot",
-    "lint": "./node_modules/.bin/eslint **/*.{js,ts,tsx}",
+    "lint": "./node_modules/.bin/eslint '**/*.{js,ts,tsx}'",
     "test": "ava",
     "coverage": "nyc ava"
   },
