@@ -15,5 +15,17 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     inline: true,
     port: 4000
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif|mp3)$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
+      }
+    ]
   }
 }
