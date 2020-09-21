@@ -1,0 +1,9 @@
+{
+  "extends": "tsconfigs/browser-executable",
+  "compilerOptions": {
+    "outDir": "../../build/overlay"
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}
