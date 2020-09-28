@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import { client } from './modules/client'
-import executeCommand from './modules/executeCommand'
 import badWordsRegExp from 'badwords/regexp'
 import vox from './modules/vox'
 import express from 'express'
 import cors from 'cors'
+import { commands } from './commands'
 
 let eventSourceListener: (command: string) => void
 
@@ -19,12 +19,44 @@ client.on('message', (target, context, msg, self) => {
   const isCommand = message.charAt(0) === '!'
   if (isCommand) {
     const command = message.replace('!', '')
-    executeCommand(client, target, context, command)
-    // send command over to frontend
-    if (eventSourceListener) {
-      eventSourceListener(command)
+    // executeCommand(client, target, context, command)
+    if (Object.prototype.hasOwnProperty.call(commands, command)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      const { text, say } = commands[command]
+
+      // handle text commands
+      if (text) client.say(target, text)
+
+      // Handle vox commands
+      if (say) vox(say)
+
+      // send command over to frontend overlay
+      if (eventSourceListener) {
+        eventSourceListener(command)
+      } else {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
+      }
+
+      // Help command
+      if (command === 'commands') {
+        let message = 'Available Commands: '
+        Object.keys(commands).forEach((command) => {
+          // Ignore this command
+          if (command !== 'commands') {
+            message += `!${command} `
+          }
+        })
+        message += '!vox'
+        client.whisper(context.username, `${message}`)
+      }
+
+      // Let users control vox
+      if (command === 'vox') {
+        vox(`${context.username} says ${message}`)
+      }
     } else {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
+      console.log(`!${command} is not found`)
     }
   // Handle Messages
   } else {

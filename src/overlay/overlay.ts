@@ -63,14 +63,17 @@ eventSource.onmessage = (e) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const { gif, sound, duration } = commands[command]
-    const audio = new Audio(sound)
-    audio.play()
-    state.gif = gif
-    render()
-    resetStateDelay.start(() => {
-      console.log('delay')
-      state.gif = null
+    if (sound) {
+      const audio = new Audio(sound)
+      audio.play()
+    }
+    if (gif && duration) {
+      state.gif = gif
       render()
-    }, duration)
+      resetStateDelay.start(() => {
+        state.gif = null
+        render()
+      }, duration)
+    }
   }
 }
