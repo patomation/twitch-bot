@@ -32,6 +32,9 @@ const executeCommand = (
       })
       client.whisper(context.username, `${message}`)
     },
+    donate: () => {
+      client.say(target, 'https://streamlabs.com/advolkit/tip')
+    },
     hello: () => {
       client.say(target, `Hello ${context.username}!`)
     },
