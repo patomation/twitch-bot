@@ -21,7 +21,11 @@ client.on('message', (target, context, msg, self) => {
     const command = message.replace('!', '')
     executeCommand(client, target, context, command)
     // send command over to frontend
-    eventSourceListener(command)
+    if (eventSourceListener) {
+      eventSourceListener(command)
+    } else {
+      console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
+    }
   // Handle Messages
   } else {
     // User is saying something
