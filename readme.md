@@ -10,9 +10,9 @@ npm install
 
 
 # Getting Started
-Local dev
+Local instance
 ```
-npm run dev
+npm run start
 ```
 
 
@@ -27,7 +27,14 @@ curl -H "Authorization: Bearer <access token>" https://api.twitch.tv/helix/
 ```
 
 
-say.speak LINUX
+# Vox Dependencies
+To get !vox to work install espeak-ng
+`sudo apt install espeak-ng`
+!Vox uses node child process spawn to run command
+`espeak-ng <message>`
+
+
+DEPRECATED say.speak LINUX
 
 To get this working 
 ```

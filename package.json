@@ -42,7 +42,6 @@
   "dependencies": {
     "badwords": "1.0.0",
     "dotenv": "8.2.0",
-    "say": "0.16.0",
     "tmi.js": "1.5.0"
   },
   "devDependencies": {

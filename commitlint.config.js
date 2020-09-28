@@ -11,7 +11,8 @@ module.exports = {
       'command',
       'eslint',
       'overlay',
-      'typescript'
+      'typescript',
+      'vox'
     ]]
   }
 }
