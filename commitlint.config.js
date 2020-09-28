@@ -5,6 +5,7 @@ module.exports = {
   rules: {
     'scope-empty': [2, 'never'],
     'scope-enum': [2, 'always', [
+      'assets',
       'bot',
       'client',
       'command',
