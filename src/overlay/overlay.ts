@@ -1,7 +1,7 @@
 import { init } from 'snabbdom/build/package/init'
 import { classModule } from 'snabbdom/build/package/modules/class'
 import { propsModule } from 'snabbdom/build/package/modules/props'
-import { styleModule } from 'snabbdom/build/package/modules/style'
+import { styleModule, VNodeStyle } from 'snabbdom/build/package/modules/style'
 import { eventListenersModule } from 'snabbdom/build/package/modules/eventlisteners'
 import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
@@ -27,14 +27,20 @@ const view = ({ gif }: typeof state): VNode =>
   h('div', {
     style: {
       fontSize: '10rem',
-      color: 'red'
+      position: 'relative'
     }
   }, [
     gif
       ? h('img', {
         props: {
           src: gif
-        }
+        },
+        style: {
+          position: 'absolute',
+          left: '0',
+          top: '0',
+          width: '100%'
+        } as unknown as VNodeStyle
       }) : null
   ])
 
