@@ -18,7 +18,7 @@ client.on('message', (target, context, msg, self) => {
   const message = msg.trim()
   if (self) { return } // Ignore messages from the bot
   const isCommand = message.charAt(0) === '!'
-  if (isCommand) {
+  if (isCommand && message !== undefined) {
     const command = message.replace('!', '').split(' ')[0]
     const args = message.replace(`!${command} `, '')
 
@@ -57,7 +57,7 @@ client.on('message', (target, context, msg, self) => {
       }
     }
   // Handle Messages
-  } else {
+  } else if (message !== undefined) {
     // User is saying something
     const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
