@@ -10,6 +10,7 @@ module.exports = {
       'client',
       'command',
       'eslint',
+      'keyword',
       'overlay',
       'typescript',
       'vox'

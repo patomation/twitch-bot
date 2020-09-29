@@ -5,6 +5,7 @@ import vox from './modules/vox'
 import express from 'express'
 import cors from 'cors'
 import { commands } from './commands'
+import { keywords } from './keywords'
 
 let eventSourceListener: (command: string) => void
 
@@ -60,6 +61,17 @@ client.on('message', (target, context, msg, self) => {
     // User is saying something
     const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
+
+    // pick up on keywords
+    Object.keys(keywords).forEach((word) => {
+      if (message.includes(word)) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        const { text, say } = keywords[word]
+        if (text) client.say(target, text)
+        if (vox) vox(say)
+      }
+    })
   }
   // Handle Emoticons
 })
