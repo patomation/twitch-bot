@@ -3,6 +3,19 @@ export const keywords = {
     say: 'Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty',
     text: 'PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt'
   },
+  panicBasket: {
+    say: 'Everything is fine',
+    text: 'panicBasket panicBasket panicBasket panicBasket panicBasket panicBasket panicBasket'
+  },
+  SirSad: {
+    say: 'sad face'
+  },
+  killad2FAIL: {
+    say: 'ERROR'
+  },
+  killad2RIP: {
+    say: 'Shutting Down'
+  },
   python: {
     text: 'python is ok. Whats up with all the tabs. Where did the brackets go?'
   },
