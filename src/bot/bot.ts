@@ -47,7 +47,7 @@ client.on('message', (target, context, msg, self) => {
       if (text) client.say(target, text)
 
       // Handle vox commands
-      if (say) vox(say)
+      if (say !== undefined) vox(say)
     } else {
       // send command over to frontend overlay
       if (eventSourceListener) {
@@ -69,7 +69,7 @@ client.on('message', (target, context, msg, self) => {
         // @ts-expect-error
         const { text, say } = keywords[word]
         if (text) client.say(target, text)
-        if (vox) vox(say)
+        if (say !== undefined) vox(say)
       }
     })
   }
