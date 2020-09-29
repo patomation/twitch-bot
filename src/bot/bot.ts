@@ -18,8 +18,25 @@ client.on('message', (target, context, msg, self) => {
   if (self) { return } // Ignore messages from the bot
   const isCommand = message.charAt(0) === '!'
   if (isCommand) {
-    const command = message.replace('!', '')
-    // executeCommand(client, target, context, command)
+    const command = message.replace('!', '').split(' ')[0]
+    const args = message.replace(`!${command} `, '')
+
+    // Help command
+    if (command === 'commands') {
+      let helpMessage = 'Available Commands: '
+      Object.keys(commands).forEach((commandName) => {
+        helpMessage += `!${commandName} `
+      })
+      helpMessage += '!vox'
+      client.say(target, `${helpMessage}`)
+    // client.whisper(context.username, `${helpMessage}`) // not working
+    }
+
+    // Let users control vox
+    if (command === 'vox') {
+      vox(`${context.username} says ${args}`)
+    }
+
     if (Object.prototype.hasOwnProperty.call(commands, command)) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
@@ -30,33 +47,13 @@ client.on('message', (target, context, msg, self) => {
 
       // Handle vox commands
       if (say) vox(say)
-
+    } else {
       // send command over to frontend overlay
       if (eventSourceListener) {
         eventSourceListener(command)
       } else {
         console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
       }
-
-      // Help command
-      if (command === 'commands') {
-        let message = 'Available Commands: '
-        Object.keys(commands).forEach((command) => {
-          // Ignore this command
-          if (command !== 'commands') {
-            message += `!${command} `
-          }
-        })
-        message += '!vox'
-        client.whisper(context.username, `${message}`)
-      }
-
-      // Let users control vox
-      if (command === 'vox') {
-        vox(`${context.username} says ${message}`)
-      }
-    } else {
-      console.log(`!${command} is not found`)
     }
   // Handle Messages
   } else {
