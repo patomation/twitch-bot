@@ -11,6 +11,7 @@ module.exports = {
       'command',
       'eslint',
       'keyword',
+      'levelup',
       'overlay',
       'typescript',
       'vox'

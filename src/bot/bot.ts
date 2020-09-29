@@ -28,7 +28,10 @@ client.on('message', (target, context, msg, self) => {
       Object.keys(commands).forEach((commandName) => {
         helpMessage += `!${commandName} `
       })
-      helpMessage += '!vox'
+      const extraCommands = [
+        '!vox', '!levelup', '!developers', '!hack', '!f'
+      ]
+      helpMessage += extraCommands.join(' ')
       client.say(target, `${helpMessage}`)
     // client.whisper(context.username, `${helpMessage}`) // not working
     }
@@ -55,6 +58,40 @@ client.on('message', (target, context, msg, self) => {
       } else {
         console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
       }
+    }
+
+    interface User {
+      points: number,
+      level: number
+    }
+    interface Users {
+      [key: string]: User
+    }
+    const userModel = {
+      points: 1,
+      level: 0
+    }
+    const xpToLevel = 10
+    if (command === 'levelup') {
+      const dataPath = './data/users.json'
+      const data = readData(dataPath) as Users
+      const user = context.username
+
+      // Create or update user keys
+      data[user] = {
+        ...userModel,
+        ...(Object.prototype.hasOwnProperty.call(data, user)
+          ? data[user]
+          : {})
+      }
+
+      data[user].points += 1
+
+      data[user].level = Math.floor(data[user].points / xpToLevel)
+      const xpRemain = data[user].points - (xpToLevel * data[user].level)
+      const xpToNextLevel = xpToLevel - xpRemain
+      client.say(target, `@${user} gained 1 experience point and has ${data[user].points} total points. Current Level: ${data[user].level}. Only ${xpToNextLevel} points away from Level ${data[user].level + 1} `)
+      writeData(dataPath, data)
     }
   // Handle Messages
   } else if (message !== undefined) {
