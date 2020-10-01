@@ -6,6 +6,8 @@ import express from 'express'
 import cors from 'cors'
 import { commands } from './commands'
 import { keywords } from './keywords'
+import { readData } from './lib/readData'
+import { writeData } from './lib/writeData'
 
 let eventSourceListener: (command: string) => void
 
