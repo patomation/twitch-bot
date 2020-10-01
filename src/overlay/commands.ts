@@ -16,6 +16,9 @@ import bwaaa from '../../assets/sounds/inception.mp3'
 import accessDenied from '../../assets/sounds/access-denied.mp3'
 import fGif from '../../assets/gif/f.gif'
 
+import thisIsFine from '../../assets/gif/this-is-fine.gif'
+import reSucks from '../../assets/sounds/re-sucks.mp3'
+
 export const commands = {
   developers: {
     gif: developersGif,
@@ -46,5 +49,10 @@ export const commands = {
     gif: fGif,
     sound: accessDenied,
     duration: 3000
+  },
+  resucks: {
+    gif: thisIsFine,
+    sound: reSucks,
+    duration: 6000
   }
 }
