@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { client } from './modules/client'
+import { upTime, upTimeStamp } from './modules/upTime'
 import badWordsRegExp from 'badwords/regexp'
 import vox from './modules/vox'
 import express from 'express'
@@ -10,6 +11,8 @@ import { readData } from './lib/readData'
 import { writeData } from './lib/writeData'
 import { readFileAsData } from './lib/readFileAsDataUrl'
 import path from 'path'
+
+upTimeStamp()
 
 interface Data {
   sound?: string // data/url
@@ -37,7 +40,7 @@ client.on('message', (target, context, msg, self) => {
         helpMessage += `!${commandName} `
       })
       const extraCommands = [
-        '!vox', '!levelup', '!developers', '!hack', '!f'
+        '!vox', '!levelup', '!developers', '!hack', '!f', '!uptime'
       ]
       helpMessage += extraCommands.join(' ')
       client.say(target, `${helpMessage}`)
@@ -113,6 +116,14 @@ client.on('message', (target, context, msg, self) => {
       client.say(target, `@${user} gained 1 experience point and has ${data[user].points} total points. Current Level: ${data[user].level}. Only ${xpToNextLevel} points away from Level ${data[user].level + 1} `)
       writeData(dataPath, data)
     }
+
+    if (command === 'uptime') {
+      const minutes = upTime()
+      const hours = Math.floor(minutes / 60)
+      const min = Math.round(((minutes / 60) - hours) * 60)
+      client.say(target, `AdVolKit has been streaming for ${hours} hours and ${min} min`)
+    }
+
   // Handle Messages
   } else if (message !== undefined) {
     // User is saying something

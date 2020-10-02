@@ -15,7 +15,8 @@ module.exports = {
       'levelup',
       'overlay',
       'typescript',
-      'vox'
+      'vox',
+      'uptime'
     ]]
   }
 }
