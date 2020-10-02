@@ -36,7 +36,7 @@ To get !vox to work install espeak-ng
 
 DEPRECATED say.speak LINUX
 
-To get this working 
+To get this working
 ```
 sudo apt-get install festival festvox-kallpc16k
 ```
@@ -72,7 +72,7 @@ export const commands = {
 
 ### How to add other types of commands
 1. Edit `src/bot/commands.ts` or `src/bot/keywords.ts`
-the `commands.ts` is for regular !commands 
+the `commands.ts` is for regular !commands
 keywords are any words in chat that you want the bot to respond to
 2. append the `command` or `keyword` object with a new object like so
 ```
@@ -80,6 +80,8 @@ export const commands = {
   ...
   hack: {
     text: 'bot will type this in chat'
+    // you can also have an array of strings to randomly choose from
+    text: ['bot will type this', 'or maybe this']
   }
 }
 ```
