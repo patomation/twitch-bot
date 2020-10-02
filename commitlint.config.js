@@ -8,6 +8,7 @@ module.exports = {
       'assets',
       'bot',
       'client',
+      'docs',
       'command',
       'eslint',
       'keyword',
