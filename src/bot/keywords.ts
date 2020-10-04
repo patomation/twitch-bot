@@ -26,10 +26,21 @@ export const keywords = {
   coffee: {
     text: 'damn good coffee is always damn good'
   },
-  hi: {
-    text: 'sup'
-  },
   hello: {
-    text: 'hey there'
+    text: [
+      'hey there',
+      'hey dude',
+      'hi',
+      'yo yo yo',
+      'welcome to the stream'
+    ]
+  },
+  nightbot: {
+    text: [
+      '@nightbot? more like daybot! LUL',
+      '@nightbot smells of cheese',
+      '@nightbot is like a box of chocolates...',
+      '@nightbot, why u do dis'
+    ]
   }
 }
