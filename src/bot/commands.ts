@@ -40,5 +40,16 @@ export const commands = {
   },
   laugh: {
     say: ':e: :e: :e: :o: :o: :o: :a: :a: :a: :a:'
+  },
+  hacktober: {
+    text: 'https://hacktoberfest.digitalocean.com'
+  },
+  bw: {
+    text: 'Im on to you @vision_of_jarvis',
+    say: 'Bot War. AAAAAAAAAAAAAAAAAAAAAAAAAAAAA!'
+  },
+  botwar: {
+    text: 'this means war... bot war that is',
+    say: 'activating laser turrets'
   }
 }
