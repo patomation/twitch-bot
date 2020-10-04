@@ -13,7 +13,7 @@ let eventSourceListener: (command: string) => void
 
 client.on('connected', (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`)
-  vox('beep boop')
+  // vox('beep boop')
 })
 
 client.on('message', (target, context, msg, self) => {
