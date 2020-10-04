@@ -49,7 +49,14 @@ client.on('message', (target, context, msg, self) => {
       const { text, say } = commands[command]
 
       // handle text commands
-      if (text) client.say(target, text)
+      if (text) {
+        if (Array.isArray(text)) {
+          const randomIndex = Math.floor(Math.random() * text.length)
+          client.say(target, text[randomIndex])
+        } else {
+          client.say(target, text)
+        }
+      }
 
       // Handle vox commands
       if (say !== undefined) vox(say)
@@ -107,7 +114,12 @@ client.on('message', (target, context, msg, self) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         const { text, say } = keywords[word]
-        if (text) client.say(target, text)
+        if (Array.isArray(text)) {
+          const randomIndex = Math.floor(Math.random() * text.length)
+          client.say(target, text[randomIndex])
+        } else {
+          client.say(target, text)
+        }
         if (say !== undefined) vox(say)
       }
     })
