@@ -19,6 +19,10 @@ import fGif from '../../assets/gif/f.gif'
 import thisIsFine from '../../assets/gif/this-is-fine.gif'
 import reSucks from '../../assets/sounds/re-sucks.mp3'
 
+import iLoveThisCompany from '../../assets/sounds/i-love-this-company.mp3'
+
+import USSR from '../../assets/sounds/USSR.mp3'
+
 export const commands = {
   developers: {
     gif: developersGif,
@@ -54,5 +58,11 @@ export const commands = {
     gif: thisIsFine,
     sound: reSucks,
     duration: 6000
+  },
+  our: {
+    sound: USSR
+  },
+  twitch: {
+    sound: iLoveThisCompany
   }
 }
