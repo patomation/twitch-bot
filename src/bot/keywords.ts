@@ -1,4 +1,6 @@
-export const keywords = {
+import { Commands } from './commands'
+
+export const keywords: Commands = {
   PJSalt: {
     say: 'Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty Salty',
     text: 'PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt PJSalt'

@@ -7,7 +7,6 @@ import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
 import Delay from './lib/Delay'
 
-import { commands } from './commands'
 import { loadAudio } from './lib/loadAudio'
 
 const patch = init([ // Init patch function with chosen modules
@@ -62,27 +61,25 @@ const eventSource = new EventSource('http://0.0.0.0:4001/connect')
 const resetStateDelay = new Delay()
 
 eventSource.onmessage = async (e) => {
-  const { command }: { command: keyof typeof commands } = JSON.parse(e.data)
+  const data = JSON.parse(e.data)
+  const { gif, sound } = data
+  let { duration = 1000 } = data
 
-  if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    const { gif, sound } = commands[command]
-    let { duration = 1000 } = commands[command]
+  if (sound) {
+    // const audio = new Audio(sound)
+    const audio = await loadAudio(sound)
+    // use audio duration for gif display duration
+    duration = audio.duration * 1000 // convert s to ms
+    audio.play()
+  }
 
-    if (sound) {
-      const audio = await loadAudio(sound)
-      // use audio duration for gif display duration
-      duration = audio.duration * 1000 // convert s to ms
-      audio.play()
-    }
-
-    if (gif) {
-      state.gif = gif
+  if (gif) {
+    state.gif = gif
+    render()
+    // Reset gif to null after a time
+    resetStateDelay.start(() => {
+      state.gif = null
       render()
-      // Reset gif to null after a time
-      resetStateDelay.start(() => {
-        state.gif = null
-        render()
-      }, duration)
-    }
+    }, duration)
   }
 }

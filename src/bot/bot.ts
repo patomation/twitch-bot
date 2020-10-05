@@ -8,8 +8,14 @@ import { commands } from './commands'
 import { keywords } from './keywords'
 import { readData } from './lib/readData'
 import { writeData } from './lib/writeData'
+import { readFileAsData } from './lib/readFileAsDataUrl'
+import path from 'path'
 
-let eventSourceListener: (command: string) => void
+interface Data {
+  sound?: string // data/url
+  gif?: string // dta/url
+}
+let sendToOverlay: (data: Data) => void
 
 client.on('connected', (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`)
@@ -44,9 +50,7 @@ client.on('message', (target, context, msg, self) => {
     }
 
     if (Object.prototype.hasOwnProperty.call(commands, command)) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const { text, say } = commands[command]
+      const { text, say, sound, gif } = commands[command]
 
       // handle text commands
       if (text) {
@@ -60,13 +64,20 @@ client.on('message', (target, context, msg, self) => {
 
       // Handle vox commands
       if (say !== undefined) vox(say)
-    } else {
-      // send command over to frontend overlay
-      if (eventSourceListener) {
-        eventSourceListener(command)
-      } else {
+
+      // handle sounds and gif
+      const payload: Data = {}
+
+      if (sound) payload.sound = readFileAsData(path.resolve('assets', 'sounds', sound))
+      if (gif) payload.gif = readFileAsData(path.resolve('assets', 'gif', gif))
+
+      if (sendToOverlay && Object.keys(payload).length > 0) {
+        sendToOverlay(payload)
+      } else if (!sendToOverlay) {
         console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
       }
+    } else {
+      // TODO log commands not found into data/commands-todo.txt or something
     }
 
     interface User {
@@ -111,13 +122,11 @@ client.on('message', (target, context, msg, self) => {
     // pick up on keywords
     Object.keys(keywords).forEach((word) => {
       if (message.includes(word)) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         const { text, say } = keywords[word]
         if (Array.isArray(text)) {
           const randomIndex = Math.floor(Math.random() * text.length)
           client.say(target, text[randomIndex])
-        } else {
+        } else if (text !== undefined) {
           client.say(target, text)
         }
         if (say !== undefined) vox(say)
@@ -137,8 +146,9 @@ app.get('/connect', (req, res) => {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache'
   })
-  eventSourceListener = (command: string) => {
-    res.write('data: ' + JSON.stringify({ command }) + '\n\n')
+
+  sendToOverlay = (data: Data) => {
+    res.write('data: ' + JSON.stringify(data) + '\n\n')
   }
 })
 const port = 4001
