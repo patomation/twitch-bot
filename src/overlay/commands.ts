@@ -28,41 +28,44 @@ import leeroyJenkins from '../../assets/sounds/leeroy-jenkins.mp3'
 import nachoManMp3 from '../../assets/sounds/nacho-man.mp3'
 import nachoManGif from '../../assets/gif/nacho-man.gif'
 
-export const commands = {
+export type Command = {
+  gif?: string
+  sound?: string
+  duration?: number
+}
+
+export type Commands = {
+  [key: string]: Command
+}
+
+export const commands: Commands = {
   developers: {
     gif: developersGif,
-    sound: developersMp3,
-    duration: 20000
+    sound: developersMp3
   },
   hack: {
     gif: typingCat,
-    sound: accessGranted,
-    duration: 3000
+    sound: accessGranted
   },
   cheers: {
     gif: cheersGif,
-    sound: cheersMp3,
-    duration: 8000
+    sound: cheersMp3
   },
   starfish: {
     gif: noThisIsPatrickGif,
-    sound: noThisIsPatrickMp3,
-    duration: 3000
+    sound: noThisIsPatrickMp3
   },
   purplestar: {
     gif: snoop,
-    sound: bwaaa,
-    duration: 3000
+    sound: bwaaa
   },
   f: {
     gif: fGif,
-    sound: accessDenied,
-    duration: 3000
+    sound: accessDenied
   },
   resucks: {
     gif: thisIsFine,
-    sound: reSucks,
-    duration: 6000
+    sound: reSucks
   },
   our: {
     sound: USSR
@@ -75,7 +78,6 @@ export const commands = {
   },
   nachoman: {
     gif: nachoManGif,
-    sound: nachoManMp3,
-    duration: 6000
+    sound: nachoManMp3
   }
 }

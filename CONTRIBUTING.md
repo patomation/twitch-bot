@@ -21,8 +21,7 @@ export const commands = {
   ...
   hack: {
     gif: hackerGif,
-    sound: hackerSound,
-    duration: 3000 // time that gif is displayed in ms
+    sound: hackerSound
   }
 }
 ```
