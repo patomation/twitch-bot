@@ -23,6 +23,8 @@ import iLoveThisCompany from '../../assets/sounds/i-love-this-company.mp3'
 
 import USSR from '../../assets/sounds/USSR.mp3'
 
+import leeroyJenkins from '../../assets/sounds/leeroy-jenkins.mp3'
+
 export const commands = {
   developers: {
     gif: developersGif,
@@ -64,5 +66,8 @@ export const commands = {
   },
   twitch: {
     sound: iLoveThisCompany
+  },
+  leeroy: {
+    sound: leeroyJenkins
   }
 }
