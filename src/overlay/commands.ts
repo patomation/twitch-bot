@@ -25,6 +25,9 @@ import USSR from '../../assets/sounds/USSR.mp3'
 
 import leeroyJenkins from '../../assets/sounds/leeroy-jenkins.mp3'
 
+import nachoManMp3 from '../../assets/sounds/nacho-man.mp3'
+import nachoManGif from '../../assets/gif/nacho-man.gif'
+
 export const commands = {
   developers: {
     gif: developersGif,
@@ -69,5 +72,10 @@ export const commands = {
   },
   leeroy: {
     sound: leeroyJenkins
+  },
+  nachoman: {
+    gif: nachoManGif,
+    sound: nachoManMp3,
+    duration: 6000
   }
 }
