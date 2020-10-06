@@ -7,7 +7,7 @@ import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
 import Delay from './lib/Delay'
 
-import { loadAudio } from './lib/loadAudio'
+import { base64ToArrayBuffer } from './lib/base64ToArrayBuffer'
 
 const patch = init([ // Init patch function with chosen modules
   classModule, // makes it easy to toggle classes
@@ -31,7 +31,8 @@ const view = ({ gif }: typeof state): VNode =>
   h('div', {
     style: {
       fontSize: '10rem',
-      position: 'relative'
+      position: 'relative',
+      height: '250px'
     }
   }, [
     gif
@@ -60,17 +61,23 @@ const eventSource = new EventSource('http://0.0.0.0:4001/connect')
 
 const resetStateDelay = new Delay()
 
+const ctx = new AudioContext()
+
 eventSource.onmessage = async (e) => {
   const data = JSON.parse(e.data)
   const { gif, sound } = data
   let { duration = 1000 } = data
 
   if (sound) {
-    // const audio = new Audio(sound)
-    const audio = await loadAudio(sound)
-    // use audio duration for gif display duration
-    duration = audio.duration * 1000 // convert s to ms
-    audio.play()
+    // Convert response to array buffer
+    const arrayBuffer = base64ToArrayBuffer(sound)
+    // decode array buffer into audio buffer
+    const audioBuffer = await ctx.decodeAudioData(arrayBuffer)
+    const source = ctx.createBufferSource()
+    source.buffer = audioBuffer
+    source.connect(ctx.destination)
+    source.start()
+    duration = audioBuffer.duration * 1000
   }
 
   if (gif) {

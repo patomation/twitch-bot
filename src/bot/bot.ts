@@ -9,8 +9,8 @@ import { commands } from './commands'
 import { keywords } from './keywords'
 import { readData } from './lib/readData'
 import { writeData } from './lib/writeData'
-import { readFileAsData } from './lib/readFileAsDataUrl'
 import path from 'path'
+import fs from 'fs'
 
 upTimeStamp()
 
@@ -71,8 +71,8 @@ client.on('message', (target, context, msg, self) => {
       // handle sounds and gif
       const payload: Data = {}
 
-      if (sound) payload.sound = readFileAsData(path.resolve('assets', 'sounds', sound))
-      if (gif) payload.gif = readFileAsData(path.resolve('assets', 'gif', gif))
+      if (sound) payload.sound = fs.readFileSync(path.resolve('assets', 'sounds', sound), { encoding: 'base64' })
+      if (gif) payload.gif = `data:image/gif;base64,${fs.readFileSync(path.resolve('assets', 'gif', gif), { encoding: 'base64' })}`
 
       if (sendToOverlay && Object.keys(payload).length > 0) {
         sendToOverlay(payload)
@@ -158,6 +158,7 @@ app.get('/connect', (req, res) => {
     'Cache-Control': 'no-cache'
   })
 
+  console.log('^^^ overlay connected ^^^')
   sendToOverlay = (data: Data) => {
     res.write('data: ' + JSON.stringify(data) + '\n\n')
   }
