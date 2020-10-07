@@ -103,5 +103,11 @@ export const commands: Commands = {
   nacho: {
     gif: 'nacho-man.gif',
     sound: 'nacho-man.mp3'
+  },
+  yes: {
+    sound: 'steve-balmer-yes.mp3'
+  },
+  lana: {
+    sound: 'archer-lana.mp3'
   }
 }
