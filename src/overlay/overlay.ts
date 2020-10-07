@@ -63,8 +63,16 @@ const resetStateDelay = new Delay()
 
 const ctx = new AudioContext()
 
-eventSource.onmessage = async (e) => {
-  const data = JSON.parse(e.data)
+type Data = {
+ gif?: string,
+ sound?: string,
+ duration?: number
+}
+
+let isPlaying = false
+
+const handlePlay = async (data: Data): Promise<void> => {
+  isPlaying = true
   const { gif, sound } = data
   let { duration = 1000 } = data
 
@@ -83,10 +91,29 @@ eventSource.onmessage = async (e) => {
   if (gif) {
     state.gif = gif
     render()
-    // Reset gif to null after a time
-    resetStateDelay.start(() => {
-      state.gif = null
-      render()
-    }, duration)
   }
+
+  resetStateDelay.start(() => {
+    // Reset gif to null after a time
+    state.gif = null
+    render()
+    // Start the next thing
+    isPlaying = false
+    tryToPlay()
+  }, duration)
+}
+
+const queue: Data[] = []
+
+const tryToPlay = () => {
+  if (!isPlaying && queue.length > 0) {
+    const data = queue.shift()
+    if (data) handlePlay(data)
+  }
+}
+
+eventSource.onmessage = async (e) => {
+  const data = JSON.parse(e.data) as Data
+  queue.push(data)
+  tryToPlay()
 }
