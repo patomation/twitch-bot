@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "ext": "ts,js",
+  "execMap": {
+    "ts": "ts-node --project ./src/bot/tsconfig.json"
+  }
+}

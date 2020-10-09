@@ -1,20 +1,13 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  entry: './build/overlay/overlay.js',
+  entry: './src/overlay/overlay.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin()
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    inline: true,
-    port: 4000
+  resolve: {
+    extensions: ['.ts', '.js']
   },
   module: {
     rules: [
@@ -25,6 +18,13 @@ module.exports = {
             loader: 'file-loader'
           }
         ]
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: {
+          configFile: path.resolve(__dirname, 'src/overlay/tsconfig.json')
+        }
       }
     ]
   }
