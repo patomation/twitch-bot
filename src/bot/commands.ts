@@ -120,5 +120,9 @@ export const commands: Commands = {
   },
   coolbeans: {
     sound: 'cool-beans.mp3'
+  },
+  thalapathy: {
+    gif: 'thalapathy-floor.gif',
+    sound: 'oh-god-im-falling.mp3'
   }
 }
