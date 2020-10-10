@@ -4,11 +4,12 @@
   "description": "",
   "main": "src/bot/",
   "scripts": {
-    "start": "concurrently \"npm:compile:bot\" \"npm:start:bot\" \"npm:compile:overlay\" \"npm:start:overlay\" ",
-    "compile:bot": "tsc --build ./src/bot/tsconfig.json --watch",
+    "start": "concurrently \"npm:transpile:bot -- --watch\" \"npm:start:bot\" \"npm:transpile:overlay -- --watch\" \"npm:start:overlay\" ",
+    "transpile:bot": "tsc --build ./src/bot/tsconfig.json",
     "start:bot": "nodemon ./build/bot/bot.js --watch build/bot",
-    "compile:overlay": "tsc --build ./src/overlay/tsconfig.json --watch",
+    "transpile:overlay": "tsc --build ./src/overlay/tsconfig.json",
     "start:overlay": "webpack-dev-server --hot",
+    "transpile": "run-s transpile:bot transpile:overlay",
     "lint": "./node_modules/.bin/eslint '**/*.{js,ts,tsx}'",
     "test": "ava",
     "coverage": "nyc ava"
@@ -21,7 +22,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run lint"
+      "pre-commit": "run-s lint transpile"
     }
   },
   "repository": {
@@ -67,6 +68,7 @@
     "html-webpack-plugin": "4.4.1",
     "husky": "4.3.0",
     "nodemon": "2.0.4",
+    "npm-run-all": "4.1.5",
     "nyc": "15.1.0",
     "snabbdom": "2.1.0",
     "tsconfigs": "5.0.0",
