@@ -84,7 +84,7 @@ export const commands: Commands = {
     sound: 'inception.mp3'
   },
   f: {
-    gif: 'f.gif',
+    gif: 'mario-hit-by-car.gif',
     sound: 'access-denied.mp3'
   },
   resucks: {
@@ -109,5 +109,13 @@ export const commands: Commands = {
   },
   lana: {
     sound: 'archer-lana.mp3'
+  },
+  wat: {
+    gif: 'raptor.gif',
+    sound: 'wat-did-you-say.mp3'
+  },
+  nailedit: {
+    gif: 'nailed-it.gif',
+    sound: 'nailed-it.mp3'
   }
 }
