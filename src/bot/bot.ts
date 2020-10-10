@@ -21,7 +21,7 @@ client.on('message', (target, context, msg, self) => {
   if (self) { return } // Ignore messages from the bot
 
   // find all commands
-  const commands = message?.split('!')
+  const commands = message.split('!')
     .filter(s => s.length > 0) // filter out empty strings
     .filter(s => message.includes(`!${s}`)) // ensure that is a command and not a sentence before command
     .map((commandString: string) => {
