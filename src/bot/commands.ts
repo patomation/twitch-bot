@@ -117,5 +117,8 @@ export const commands: Commands = {
   nailedit: {
     gif: 'nailed-it.gif',
     sound: 'nailed-it.mp3'
+  },
+  coolbeans: {
+    sound: 'cool-beans.mp3'
   }
 }
