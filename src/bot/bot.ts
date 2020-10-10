@@ -51,9 +51,9 @@ client.on('message', (target, context, msg, self) => {
         const { text, say } = keywords[word]
         if (Array.isArray(text)) {
           const randomIndex = Math.floor(Math.random() * text.length)
-          client.say(target, text[randomIndex])
+          client.say(target, `@${context.username} ${text[randomIndex]}`)
         } else if (text !== undefined) {
-          client.say(target, text)
+          client.say(target, `@${context.username} ${text}`)
         }
         if (say !== undefined) vox(say)
       }
