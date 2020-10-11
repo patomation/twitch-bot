@@ -26,7 +26,8 @@ client.on('message', (target, context, msg, self) => {
     .filter(s => message.includes(`!${s}`)) // ensure that is a command and not a sentence before command
     .map((commandString: string) => {
       const command = commandString.split(' ')[0]
-      const args = commandString.replace(`!${command} `, '').split(' ')
+      const args = commandString.split(' ')
+        .filter(s => s !== command)
       return {
         command,
         args
