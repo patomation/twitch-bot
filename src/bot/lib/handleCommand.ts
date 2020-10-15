@@ -8,6 +8,7 @@ import vox from '../modules/vox'
 import fs from 'fs'
 import path from 'path'
 import { sendToOverlay } from './overlayEventSource'
+import { initiateVote } from './vote'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
   // Help command
@@ -24,9 +25,17 @@ export const handleCommand = (command: string, args: string[], target: string, c
     // client.whisper(context.username, `${helpMessage}`) // not working
   }
 
+  // Allow voting
+  if (command === 'vote') initiateVote(args.join(' '))
+  // Vote for code clash
+  if (
+    command === 'clashofcode' ||
+    command === 'clash'
+  ) initiateVote('Clash of Code?')
+
   // Let users control vox
   if (command === 'vox') {
-    vox(`${context.username} says ${args}`)
+    vox(`${context.username} says ${args.join(' ')}`)
   }
 
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
@@ -55,7 +64,8 @@ export const handleCommand = (command: string, args: string[], target: string, c
     'commands',
     'uptime',
     'vox',
-    'levelup'
+    'levelup',
+    'vote', 'clashofcode', 'clash'
   ].includes(command)) {
     if (command.charAt(command.length - 1) === '') return // if there's empty space at the end of the string we don't add the command
     client.say(target, `${context.username} this command doesn't exist unfortunately :( can you tell us more so we can add it?`)

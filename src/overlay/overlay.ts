@@ -8,6 +8,7 @@ import { VNode } from 'snabbdom/build/package/vnode'
 import Delay from './lib/Delay'
 
 import { base64ToArrayBuffer } from './lib/base64ToArrayBuffer'
+import { voteView } from './views/vote'
 
 const patch = init([ // Init patch function with chosen modules
   classModule, // makes it easy to toggle classes
@@ -20,19 +21,21 @@ const container = document.createElement('div')
 document.body.appendChild(container)
 
 interface State {
-  gif: null | string
+  gif: null | string,
+  vote: null | Data['vote']
 }
 
 const state: State = {
-  gif: null
+  gif: null,
+  vote: null
 }
 
-const view = ({ gif }: typeof state): VNode =>
+const view = ({ gif, vote }: typeof state): VNode =>
   h('div', {
     style: {
-      fontSize: '10rem',
       position: 'relative',
-      height: '250px'
+      height: '250px',
+      fontFamily: 'Sans-Serif'
     }
   }, [
     gif
@@ -46,7 +49,8 @@ const view = ({ gif }: typeof state): VNode =>
           top: '0',
           width: '100%'
         } as unknown as VNodeStyle
-      }) : null
+      }) : null,
+    vote ? voteView(vote) : null
   ])
 
 let vnode: VNode
@@ -62,12 +66,6 @@ const eventSource = new EventSource('http://0.0.0.0:4001/connect')
 const resetStateDelay = new Delay()
 
 const ctx = new AudioContext()
-
-type Data = {
- gif?: string,
- sound?: string,
- duration?: number
-}
 
 let isPlaying = false
 
@@ -114,6 +112,15 @@ const handlePlay = async (data: Data): Promise<void> => {
 
 eventSource.onmessage = async (e) => {
   const data = JSON.parse(e.data) as Data
-  queue.push(data)
-  tryToPlay()
+  if (Object.prototype.hasOwnProperty.call(data, 'vote')) {
+    state.vote = data.vote
+    state.gif = null // stop a gif animation
+    render()
+  } else if (Object.prototype.hasOwnProperty.call(data, 'voteClear')) {
+    state.vote = null
+    render()
+  } else {
+    queue.push(data)
+    tryToPlay()
+  }
 }

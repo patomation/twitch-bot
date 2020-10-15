@@ -4,6 +4,7 @@
     "outDir": "../../build/overlay"
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../types/*.ts"
   ]
 }
