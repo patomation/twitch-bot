@@ -6,6 +6,7 @@ import vox from './modules/vox'
 import { keywords } from './keywords'
 import { handleCommand } from './lib/handleCommand'
 import { connectOverlay } from './lib/overlayEventSource'
+import { castVote } from './lib/vote'
 
 upTimeStamp()
 
@@ -33,6 +34,11 @@ client.on('message', (target, context, msg, self) => {
         args
       }
     })
+
+  // Handle casting votes
+  if (message === '1' || message === '2') {
+    castVote(context.username, parseInt(message))
+  }
 
   // Handle Commands
   if (commands.length > 0) {
