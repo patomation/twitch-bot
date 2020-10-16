@@ -7,6 +7,7 @@ import { keywords } from './keywords'
 import { handleCommand } from './lib/handleCommand'
 import { connectOverlay } from './lib/overlayEventSource'
 import { castVote } from './lib/vote'
+import { logger } from './lib/logger'
 
 upTimeStamp()
 
@@ -51,6 +52,7 @@ client.on('message', (target, context, msg, self) => {
     // User is saying something
     const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
+    logger('chat_log', `${context.username}: ${textMessage}`)
 
     // pick up on keywords
     Object.keys(keywords).forEach((word) => {

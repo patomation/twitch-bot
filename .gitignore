@@ -9,3 +9,4 @@ data.json
 build
 data
 *.txt
+logs

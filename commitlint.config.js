@@ -14,6 +14,7 @@ module.exports = {
       'eslint',
       'keyword',
       'levelup',
+      'logger',
       'overlay',
       'typescript',
       'vote',
