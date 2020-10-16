@@ -9,6 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import { sendToOverlay } from './overlayEventSource'
 import { initiateVote } from './vote'
+import { logger } from './logger'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
   // Help command
@@ -69,11 +70,7 @@ export const handleCommand = (command: string, args: string[], target: string, c
   ].includes(command)) {
     if (command.charAt(command.length - 1) === '') return // if there's empty space at the end of the string we don't add the command
     client.say(target, `${context.username} this command doesn't exist unfortunately :( can you tell us more so we can add it?`)
-    fs.appendFile('src/bot/lib/commands-todo.txt', `!${command} command doesn't exist. and was suggested by ${context.username}\nadditional info:\n\n`, (err) => {
-      if (err) throw err
-
-      console.log('new command added')
-    })
+    logger('commands_todo', `!${command} command doesn't exist. and was suggested by ${context.username}\nadditional info:\n`)
   }
 
   interface User {
