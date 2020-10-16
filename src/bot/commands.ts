@@ -121,8 +121,11 @@ export const commands: Commands = {
   coolbeans: {
     sound: 'cool-beans.mp3'
   },
-  thalapathy: {
+  alluarjun: {
     gif: 'thalapathy-floor.gif',
     sound: 'oh-god-im-falling.mp3'
+  }
+   chattrbox: {
+    text: 'ChattrBox a dev from India. The best chatting app developer. Contact him through chattrboxapps@gmail.com.  His website:chattrbox.in , His app : https://play.google.com/store/apps/details?id=com.chattrbox.chat
   }
 }
