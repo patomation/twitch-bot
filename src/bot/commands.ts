@@ -19,6 +19,9 @@ export const commands: Commands = {
   github: {
     text: 'https://github.com/patomation/'
   },
+  gamejam: {
+    text: 'https://itch.io/jam/jamoween'
+  },
   discord: {
     text: 'https://discord.gg/ttbJuve'
   },

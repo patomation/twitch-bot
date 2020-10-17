@@ -9,7 +9,7 @@ export const voteView = ({
 }: Vote): VNode =>
   h('div.vote', {
     style: {
-      background: 'gold',
+      background: 'rgba(212,175,55, 0.4)',
       padding: '2rem',
       borderRadius: '10px',
       fontSize: '1rem'

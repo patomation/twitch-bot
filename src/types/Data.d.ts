@@ -1,6 +1,5 @@
 interface Data {
-  sound?: string // data/url
-  gif?: string // dta/url
+  alert?: Alert
   duration?: number
   vote?: Vote
   voteClear?: boolean

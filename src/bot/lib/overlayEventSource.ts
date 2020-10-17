@@ -1,11 +1,13 @@
 import express from 'express'
 import cors from 'cors'
 
-let triggerEvent: (data: Data) => void
+const listeners: Array<(data: Data) => void> = []
 
 export const sendToOverlay = (payload: Data): void => {
-  if (triggerEvent) {
-    triggerEvent(payload)
+  if (listeners) {
+    listeners.forEach(listener => {
+      listener(payload)
+    })
   } else if (!sendToOverlay) {
     console.log('!!!!!!!!!!!!!!!!!!!!!!! overlay not ready')
   }
@@ -22,9 +24,9 @@ export const connectOverlay = (): void => {
     })
 
     console.log('^-^ overlay connected ^.^')
-    triggerEvent = (data: Data) => {
+    listeners.push((data: Data) => {
       res.write('data: ' + JSON.stringify(data) + '\n\n')
-    }
+    })
   })
   const port = 4001
   app.listen(port, () => {

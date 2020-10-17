@@ -55,11 +55,11 @@ export const handleCommand = (command: string, args: string[], target: string, c
     // Handle vox commands
     if (say !== undefined) vox(say)
 
-    // handle sounds and gif
-    const payload: Data = {}
-    if (sound) payload.sound = fs.readFileSync(path.resolve('assets', 'sounds', sound), { encoding: 'base64' })
-    if (gif) payload.gif = `data:image/gif;base64,${fs.readFileSync(path.resolve('assets', 'gif', gif), { encoding: 'base64' })}`
-    if (Object.keys(payload).length > 0) sendToOverlay(payload)
+    // handle alert - sounds and gif
+    const alert: Alert = {}
+    if (sound) alert.sound = fs.readFileSync(path.resolve('assets', 'sounds', sound), { encoding: 'base64' })
+    if (gif) alert.gif = `data:image/gif;base64,${fs.readFileSync(path.resolve('assets', 'gif', gif), { encoding: 'base64' })}`
+    if (Object.keys(alert).length > 0) sendToOverlay({ alert })
   // do not run for custom commands not in commands.ts
   } else if (![
     'commands',

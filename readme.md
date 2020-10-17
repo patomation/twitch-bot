@@ -15,6 +15,14 @@ Local instance
 npm run start
 ```
 
+# Overlay Widgets
+
+Alert Widget
+`localhost:4000/alert`
+
+HackBar Widget
+`localhost:4000/hack-bar`
+
 
 # Get OAUTH_TOKEN
 an easy way to get the [OAUTH_TOKEN](https://twitchapps.com/tmi/) from a community driven api wrapper
