@@ -1,0 +1,10 @@
+{
+  "extends": "tsconfigs/nodejs-executable",
+  "compilerOptions": {
+    "outDir": "../../build/bot"
+  },
+  "include": [
+    "**/*.ts",
+    "../types/*.ts"
+  ]
+}
