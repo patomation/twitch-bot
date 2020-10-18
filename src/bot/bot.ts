@@ -8,6 +8,7 @@ import { handleCommand } from './lib/handleCommand'
 import { connectOverlay } from './lib/overlayEventSource'
 import { castVote } from './lib/vote'
 import { logger } from './lib/logger'
+import { includesWord } from './lib/includesWord'
 
 upTimeStamp()
 
@@ -56,7 +57,7 @@ client.on('message', (target, context, msg, self) => {
 
     // pick up on keywords
     Object.keys(keywords).forEach((word) => {
-      if (message.includes(word)) {
+      if (includesWord(message, word)) {
         const { text, say } = keywords[word]
         if (Array.isArray(text)) {
           const randomIndex = Math.floor(Math.random() * text.length)
