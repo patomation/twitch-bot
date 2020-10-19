@@ -11,6 +11,7 @@
     "start:overlay": "webpack-dev-server --hot",
     "transpile": "run-s transpile:bot transpile:overlay",
     "lint": "./node_modules/.bin/eslint '**/*.{js,ts,tsx}'",
+    "lint:typeChecking": "tsc --noEmit",
     "test": "ava",
     "coverage": "nyc ava"
   },
