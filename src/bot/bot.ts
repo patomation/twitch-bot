@@ -8,6 +8,8 @@ import { handleCommand } from './lib/handleCommand'
 import { connectOverlay } from './lib/overlayEventSource'
 import { castVote } from './lib/vote'
 import { logger } from './lib/logger'
+import { includesWord } from './lib/includesWord'
+import { getCommands } from './lib/getCommands'
 
 upTimeStamp()
 
@@ -23,18 +25,7 @@ client.on('message', (target, context, msg, self) => {
   if (self) { return } // Ignore messages from the bot
 
   // find all commands
-  const commands = message.split('!')
-    .filter(s => s.length > 0) // filter out empty strings
-    .filter(s => message.includes(`!${s}`)) // ensure that is a command and not a sentence before command
-    .map((commandString: string) => {
-      const command = commandString.split(' ')[0]
-      const args = commandString.split(' ')
-        .filter(s => s !== command)
-      return {
-        command,
-        args
-      }
-    })
+  const commands = getCommands('!', message)
 
   // Handle casting votes
   if (message === '1' || message === '2') {
@@ -56,7 +47,7 @@ client.on('message', (target, context, msg, self) => {
 
     // pick up on keywords
     Object.keys(keywords).forEach((word) => {
-      if (message.includes(word)) {
+      if (includesWord(message, word)) {
         const { text, say } = keywords[word]
         if (Array.isArray(text)) {
           const randomIndex = Math.floor(Math.random() * text.length)

@@ -53,6 +53,13 @@ export const keywords: Commands = {
       'welcome to the stream'
     ]
   },
+  hi: {
+    text: [
+      'hi to you',
+      'yo yo yo',
+      'welcome to the stream'
+    ]
+  },
   moobot: {
     text: [
       'moooooooooooooooooooooooooooooooo'

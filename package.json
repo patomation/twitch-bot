@@ -9,21 +9,22 @@
     "start:bot": "nodemon ./build/bot/bot.js --watch build/bot",
     "transpile:overlay": "tsc --build ./src/overlay/tsconfig.json",
     "start:overlay": "webpack-dev-server --hot",
-    "transpile": "run-s transpile:bot transpile:overlay",
+    "transpile": "run-s transpile:bot transpile:overlay transpile:test",
     "lint": "./node_modules/.bin/eslint '**/*.{js,ts,tsx}'",
     "lint:typeChecking": "tsc --noEmit",
-    "test": "ava",
+    "transpile:test": "tsc --build ./src/test/tsconfig.json",
+    "unit": "ava",
+    "test": "run-s lint transpile unit",
     "coverage": "nyc ava"
   },
   "ava": {
-    "extensions": [
-      "js"
-    ]
+    "extensions": ["js"],
+    "files": ["build/test/**/*"]
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "run-s lint transpile"
+      "pre-commit": "npm run test"
     }
   },
   "repository": {

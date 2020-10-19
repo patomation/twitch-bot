@@ -1,0 +1,20 @@
+{
+  "extends": "tsconfigs/nodejs-executable",
+  "compilerOptions": {
+    "rootDir": "../",
+    "outDir": "../../build/",
+    "plugins": [
+      {
+        "transform": "ts-auto-mock/transformer"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../bot/tsconfig.json"
+    }
+  ]
+}
