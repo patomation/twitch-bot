@@ -127,6 +127,10 @@ export const commands: Commands = {
   alluarjun: { // pronunciation a-ll-u ar-ju-n
     gif: 'thalapathy-floor.gif',
     sound: 'oh-god-im-falling.mp3'
+  },
+  depp: {
+    text: ' I am dishonest, and a dishonest man you can always trust to be dishonest.',
+    say: ' I am dishonest, and a dishonest man you can always trust to be dishonest.'
   }
   // TODO thalapathy
 }
