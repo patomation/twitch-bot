@@ -124,8 +124,9 @@ export const commands: Commands = {
   coolbeans: {
     sound: 'cool-beans.mp3'
   },
-  thalapathy: {
+  alluarjun: { // pronunciation a-ll-u ar-ju-n
     gif: 'thalapathy-floor.gif',
     sound: 'oh-god-im-falling.mp3'
   }
+  // TODO thalapathy
 }
