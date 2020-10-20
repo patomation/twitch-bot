@@ -59,7 +59,16 @@ client.on('message', (target, context, msg, self) => {
       }
     })
   }
-  // Handle Emoticons
+
+  // Handle specific user messages
+  getCommands('@', message).forEach(({ command }) => {
+    const userName = command.toLowerCase()
+    // const userMessage = args.join(' ')
+    if (userName === process.env.BOT_USERNAME) {
+      client.say(target, 'no you')
+    }
+  })
+  // TODO: Handle Emoticons
 })
 
 client.connect()
