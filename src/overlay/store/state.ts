@@ -2,14 +2,16 @@ export type State = {
   alert: Alert | null
   vote: null | Data['vote'],
   queue: Data[],
-  isPlaying: boolean
+  isPlaying: boolean,
+  soundCommands: string[]
 }
 
 export let state: State = {
   alert: null,
   vote: null,
   queue: [],
-  isPlaying: false
+  isPlaying: false,
+  soundCommands: []
 }
 
 type NextState = {
@@ -18,7 +20,7 @@ type NextState = {
 
 type Listener = (state: State) => void
 
-type SpecificListeners = {
+type SubscribedListeners = {
   [S in keyof State]?: Listener[]
 }
 
@@ -31,20 +33,21 @@ export const subscribe = (listener: Listener): void => {
   listeners.push(listener)
 }
 
-const specificListeners: SpecificListeners = {}
+const subscribedListeners: SubscribedListeners = Object.keys(state).reduce((acc: SubscribedListeners, key) => {
+  acc[key as keyof State] = []
+  return acc
+}, {})
+
 /**
  * subscribe to a specific change to a key/item in state
  * @param key string keyof State
  * @param listener Function
  */
 export const subscribeTo = (key: keyof State, listener: Listener): void => {
-  const prevListeners = specificListeners[key]
-
-  if (prevListeners === undefined) {
-    specificListeners[key] = [
-      ...(prevListeners !== undefined ? prevListeners : []),
-      listener
-    ]
+  if (Array.isArray(subscribedListeners[key as keyof State])) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    subscribedListeners[key].push(listener)
   }
 }
 
@@ -61,12 +64,13 @@ export const setState = (nextState: NextState): void => {
 
   // update specific subscribers
   Object.keys(nextState).forEach((key) => {
-    if (Object.prototype.hasOwnProperty.call(specificListeners, key)) {
-      // Todo do this the proper way without this ts hack
-      const specificListener = (specificListeners as unknown as Record<string, unknown>)[key] as Listener[]
-      specificListener.forEach((listener: Listener) => {
-        listener(state)
-      })
+    if (Object.prototype.hasOwnProperty.call(subscribedListeners, key)) {
+      const specificListeners = subscribedListeners[key as keyof State]
+      if (specificListeners !== undefined) {
+        specificListeners.forEach((listener: Listener) => {
+          listener(state)
+        })
+      }
     }
   })
 }

@@ -7,10 +7,12 @@
       {
         "transform": "ts-auto-mock/transformer"
       }
-    ]
+    ],
+    "lib": ["DOM"]
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../types/*.ts"
   ],
   "references": [
     {

@@ -1,5 +1,26 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
+
+const templateContent = `
+  <html>
+    <body>
+    </body>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+      }
+    </style>
+  </html>
+`
+
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -9,7 +30,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({ templateContent }),
+    new Dotenv()
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

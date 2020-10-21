@@ -1,6 +1,6 @@
-import { setState, State } from './state'
+import { setState } from './state'
 
-export const showVote = (vote: State['vote']): void => {
+export const showVote = (vote: Vote): void => {
   setState({ vote })
 }
 
@@ -12,4 +12,8 @@ export const hideVote = (): void => {
 
 export const setAlert = (alert: Alert | null): void => {
   setState({ alert })
+}
+
+export const setSoundCommands = (soundCommands: string[]): void => {
+  setState({ soundCommands })
 }
