@@ -17,8 +17,12 @@
     "coverage": "nyc ava"
   },
   "ava": {
-    "extensions": ["js"],
-    "files": ["build/test/**/*"]
+    "extensions": [
+      "js"
+    ],
+    "files": [
+      "build/test/**/*"
+    ]
   },
   "husky": {
     "hooks": {
