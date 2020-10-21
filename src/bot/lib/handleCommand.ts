@@ -5,11 +5,11 @@ import { client, Context } from '../modules/client'
 import { upTime } from '../modules/upTime'
 import vox from '../modules/vox'
 
-import fs from 'fs'
-import path from 'path'
-import { sendToOverlay } from './overlayEventSource'
 import { initiateVote } from './vote'
 import { logger } from './logger'
+import { sendToClient } from '../api/connect'
+import { readSound } from './readSound'
+import { readGif } from './readGif'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
   // Help command
@@ -57,9 +57,9 @@ export const handleCommand = (command: string, args: string[], target: string, c
 
     // handle alert - sounds and gif
     const alert: Alert = {}
-    if (sound) alert.sound = fs.readFileSync(path.resolve('assets', 'sounds', sound), { encoding: 'base64' })
-    if (gif) alert.gif = `data:image/gif;base64,${fs.readFileSync(path.resolve('assets', 'gif', gif), { encoding: 'base64' })}`
-    if (Object.keys(alert).length > 0) sendToOverlay({ alert })
+    if (sound) alert.sound = readSound(sound)
+    if (gif) alert.gif = readGif(gif)
+    if (Object.keys(alert).length > 0) sendToClient({ alert })
   // do not run for custom commands not in commands.ts
   } else if (![
     'commands',

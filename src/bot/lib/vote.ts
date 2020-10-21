@@ -1,4 +1,4 @@
-import { sendToOverlay } from './overlayEventSource'
+import { sendToClient } from '../api/connect'
 
 let voteInProgress = false
 let voteTopic: string
@@ -27,7 +27,7 @@ const collectResults = () => {
 
 const clearVote = () => {
   // get results
-  sendToOverlay({
+  sendToClient({
     voteClear: true
   })
 }
@@ -35,7 +35,7 @@ const clearVote = () => {
 const updateOverlay = () => {
   const results = collectResults()
 
-  sendToOverlay({
+  sendToClient({
     vote: {
       topic: voteTopic,
       yes: results[1] || 0,

@@ -11,6 +11,7 @@ module.exports = {
       'development',
       'docs',
       'command',
+      'controller',
       'eslint',
       'keyword',
       'levelup',

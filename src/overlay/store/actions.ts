@@ -1,4 +1,5 @@
-import { hideVote, showVote, setAlert } from './mutations'
+import { host } from '../host'
+import { hideVote, showVote, setAlert, setSoundCommands } from './mutations'
 
 // TODO move into state/mutations
 let isPlaying = false
@@ -28,11 +29,21 @@ export const alertComplete = (): void => {
 
 export const receiveEventSourceMessage = (data: Data): void => {
   if (Object.prototype.hasOwnProperty.call(data, 'vote')) {
-    showVote(data.vote)
+    showVote(data.vote as Vote)
   } else if (Object.prototype.hasOwnProperty.call(data, 'voteClear')) {
     hideVote()
   } else if (data.alert) {
     alertQueue.push(data.alert)
     handleNextAlert()
   }
+}
+
+export const controllerButtonClick = (command: string): void => {
+  fetch(`${host}/trigger-command/${command}`)
+}
+
+export const getSoundCommands = async (): Promise<void> => {
+  const response = await fetch(`${host}/get-sound-commands`)
+  const { soundCommands } = await response.json()
+  setSoundCommands(soundCommands)
 }
