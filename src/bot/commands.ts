@@ -131,6 +131,24 @@ export const commands: Commands = {
   depp: {
     text: ' I am dishonest, and a dishonest man you can always trust to be dishonest.',
     say: ' I am dishonest, and a dishonest man you can always trust to be dishonest.'
-  }
+  },
   // TODO thalapathy
+  chattrbox: {
+    sound: 'chattrbox.mp3'
+  },
+  cash: {
+    sound: 'cash.mp3'
+  },
+  drumroll: {
+    sound: 'drumroll.mp3'
+  },
+  failure: {
+    sound: 'failure.mp3'
+  },
+  ragea: {
+    sound: 'ragea.mp3'
+  },
+  tada: {
+    sound: 'tada.mp3'
+  }
 }
