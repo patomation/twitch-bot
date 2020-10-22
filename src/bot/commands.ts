@@ -150,5 +150,8 @@ export const commands: Commands = {
   },
   tada: {
     sound: 'tada.mp3'
+  },
+  a: { // Andrelamus's request
+    sound: 'gawr-gura-a.mp3'
   }
 }
