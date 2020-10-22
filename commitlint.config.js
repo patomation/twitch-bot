@@ -11,6 +11,7 @@ module.exports = {
       'development',
       'docs',
       'command',
+      'command-marque',
       'controller',
       'eslint',
       'keyword',
