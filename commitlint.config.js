@@ -18,6 +18,7 @@ module.exports = {
       'levelup',
       'logger',
       'overlay',
+      'shoutout',
       'typescript',
       'vote',
       'vox',

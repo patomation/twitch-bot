@@ -10,6 +10,7 @@ import { logger } from './logger'
 import { sendToClient } from '../api/connect'
 import { readSound } from './readSound'
 import { readGif } from './readGif'
+import { shoutOut } from './shoutout'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
   // Help command
@@ -40,12 +41,7 @@ export const handleCommand = (command: string, args: string[], target: string, c
   }
 
   // Shoutout
-  if (command === 'so') {
-    // ensure that @ was removed in case it was used.
-    const soUser = args[0].replace('@', '')
-    // @ is added back in the text message but not the url
-    client.say(target, `Be sure to follow @${soUser} at https://www.twitch.tv/${soUser}!`)
-  }
+  if (command === 'so') shoutOut(target, args[0])
 
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
     const { text, say, sound, gif } = commands[command]
