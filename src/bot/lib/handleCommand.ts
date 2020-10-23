@@ -41,7 +41,10 @@ export const handleCommand = (command: string, args: string[], target: string, c
 
   // Shoutout
   if (command === 'so') {
-    client.say(target, `Be sure to follow ${args[0]} at https://www.twitch.tv/${args[0]}!`)
+    // ensure that @ was removed in case it was used.
+    const soUser = args[0].replace('@', '')
+    // @ is added back in the text message but not the url
+    client.say(target, `Be sure to follow @${soUser} at https://www.twitch.tv/${soUser}!`)
   }
 
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
