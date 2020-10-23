@@ -158,5 +158,31 @@ export const commands: Commands = {
   vanakkam: {
     gif: 'vanakkam.gif',
     say: 'vanakkam'
+  },
+  guerrillakiller: {
+    sound: 'guerrillakillaforilla.mp3',
+    confetti: true
+  },
+  trololo: {
+    sound: 'trololo.mp3'
+  },
+  twat: {
+    sound: 'twat.mp3'
+  },
+  fancycommand: {
+    sound: 'fancycommand.mp3',
+    confetti: true
+  },
+  spaghettihorn: {
+    sound: 'ragea.mp3',
+    say: 'mama mia'
+  },
+  steal: {
+    text: 'good developers borrow, great developers steal',
+    say: 'good developers borrow, great developers steal'
+  },
+  enjoytolive: {
+    sound: 'enjoytolive.mp3',
+    confetti: true
   }
 }
