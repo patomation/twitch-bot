@@ -153,5 +153,9 @@ export const commands: Commands = {
   },
   a: { // Andrelamus's request
     sound: 'gawr-gura-a.mp3'
+  },
+  vanakkam: {
+    gif: 'vanakkam.gif',
+    say: 'vanakkam'
   }
 }
