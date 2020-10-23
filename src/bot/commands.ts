@@ -2,7 +2,8 @@ export type Command = {
   text?: string | string[]
   say?: string
   gif?: string
-  sound?: string
+  sound?: string,
+  confetti?: boolean
 }
 
 export type Commands = {

@@ -49,7 +49,7 @@ export const handleCommand = (command: string, args: string[], target: string, c
   }
 
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    const { text, say, sound, gif } = commands[command]
+    const { text, say, sound, gif, confetti } = commands[command]
 
     // handle text commands
     if (text) {
@@ -68,6 +68,7 @@ export const handleCommand = (command: string, args: string[], target: string, c
     const alert: Alert = {}
     if (sound) alert.sound = readSound(sound)
     if (gif) alert.gif = readGif(gif)
+    if (confetti === true) alert.confetti = true
     if (Object.keys(alert).length > 0) sendToClient({ alert })
   // do not run for custom commands not in commands.ts
   } else if (![
