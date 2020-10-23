@@ -25,7 +25,8 @@ module.exports = {
       'typescript',
       'vote',
       'vox',
-      'uptime'
+      'uptime',
+      'webpack'
     ]]
   }
 }
