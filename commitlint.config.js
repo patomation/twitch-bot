@@ -10,6 +10,7 @@ module.exports = {
       'client',
       'development',
       'docs',
+      'ci',
       'command',
       'command-marque',
       'controller',

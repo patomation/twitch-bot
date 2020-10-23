@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Espeak-NG
+        run: sudo apt-get install espeak-ng
+
       - name: Install Node Modules
         run: npm install
 
