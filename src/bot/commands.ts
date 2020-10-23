@@ -173,6 +173,8 @@ export const commands: Commands = {
     sound: 'fancycommand.mp3',
     confetti: true
   },
+  // TODO: fancypants
+  // TODO: fancyface
   spaghettihorn: {
     sound: 'ragea.mp3',
     say: 'mama mia'
@@ -184,5 +186,32 @@ export const commands: Commands = {
   enjoytolive: {
     sound: 'enjoytolive.mp3',
     confetti: true
+  },
+  blimey: {
+    gif: 'blimey.gif',
+    sound: 'blimey.mp3'
+  },
+  dontunderstand: {
+    gif: 'john-cleese-no.gif',
+    sound: 'dont-understand.mp3'
+  },
+  bbc: {
+    gif: 'john-cleese-bell.gif',
+    sound: 'bbc-apology.mp3'
+  },
+  secretsignal: {
+    gif: 'secretsignal.gif'
+  },
+  nonsence: {
+    say: 'jib jab wuba luba glub galb'
+  },
+  diskafuti: {
+    sound: 'diskafuti.mp3'
+  },
+  different: {
+    sound: 'completely-different.mp3'
   }
+  // TODO whatishappening
+  // TODO wow
+  // thatwasfun
 }
