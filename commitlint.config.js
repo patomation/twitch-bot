@@ -8,6 +8,7 @@ module.exports = {
       'assets',
       'bot',
       'client',
+      'chat-log-reader',
       'development',
       'docs',
       'ci',
