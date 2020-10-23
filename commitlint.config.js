@@ -15,6 +15,7 @@ module.exports = {
       'command-marque',
       'controller',
       'eslint',
+      'hello',
       'keyword',
       'levelup',
       'logger',
