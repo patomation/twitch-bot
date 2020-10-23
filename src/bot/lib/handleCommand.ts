@@ -39,6 +39,11 @@ export const handleCommand = (command: string, args: string[], target: string, c
     vox(`${context.username} says ${args.join(' ')}`)
   }
 
+  // Shoutout
+  if (command === 'so') {
+    client.say(target, `Be sure to follow ${args[0]} at https://www.twitch.tv/${args[0]}!`)
+  }
+
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
     const { text, say, sound, gif } = commands[command]
 
@@ -66,7 +71,8 @@ export const handleCommand = (command: string, args: string[], target: string, c
     'uptime',
     'vox',
     'levelup',
-    'vote', 'clashofcode', 'clash'
+    'vote', 'clashofcode', 'clash',
+    'so'
   ].includes(command)) {
     if (command.charAt(command.length - 1) === '') return // if there's empty space at the end of the string we don't add the command
     client.say(target, `${context.username} this command doesn't exist unfortunately :( can you tell us more so we can add it?`)
