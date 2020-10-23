@@ -1,5 +1,6 @@
 type Alert = {
   gif?: string,
   sound?: string
-  override?: boolean
+  override?: boolean,
+  confetti?: boolean
 }

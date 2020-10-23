@@ -14,6 +14,7 @@ module.exports = {
       'ci',
       'command',
       'command-marque',
+      'confetti',
       'controller',
       'eslint',
       'greeting',
