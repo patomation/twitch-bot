@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 
-const chatLogPath = path.resolve('./logs/chat_log.txt')
+const chatLogPath = path.resolve(__dirname, '../', './logs/chat_log.txt')
 
 const readLastLine = (filePath) => new Promise((resolve) => {
   let lastLine = ''

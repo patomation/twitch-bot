@@ -3,13 +3,15 @@ import { readData } from './readData'
 import { writeData } from './writeData'
 import { client, Context } from '../modules/client'
 import { upTime } from '../modules/upTime'
-import vox from '../modules/vox'
+import { vox } from './vox'
 
-import fs from 'fs'
-import path from 'path'
-import { sendToOverlay } from './overlayEventSource'
 import { initiateVote } from './vote'
 import { logger } from './logger'
+import { sendToClient } from '../api/connect'
+import { readSound } from './readSound'
+import { readGif } from './readGif'
+import { shoutOut } from './shoutout'
+import { hello } from './hello'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
   // Help command
@@ -39,8 +41,15 @@ export const handleCommand = (command: string, args: string[], target: string, c
     vox(`${context.username} says ${args.join(' ')}`)
   }
 
+  // Shoutout
+  if (command === 'so') shoutOut(target, args[0])
+
+  if (command === 'hello') {
+    hello(context.username)
+  }
+
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    const { text, say, sound, gif } = commands[command]
+    const { text, say, sound, gif, confetti } = commands[command]
 
     // handle text commands
     if (text) {
@@ -57,16 +66,19 @@ export const handleCommand = (command: string, args: string[], target: string, c
 
     // handle alert - sounds and gif
     const alert: Alert = {}
-    if (sound) alert.sound = fs.readFileSync(path.resolve('assets', 'sounds', sound), { encoding: 'base64' })
-    if (gif) alert.gif = `data:image/gif;base64,${fs.readFileSync(path.resolve('assets', 'gif', gif), { encoding: 'base64' })}`
-    if (Object.keys(alert).length > 0) sendToOverlay({ alert })
+    if (sound) alert.sound = readSound(sound)
+    if (gif) alert.gif = readGif(gif)
+    if (confetti === true) alert.confetti = true
+    if (Object.keys(alert).length > 0) sendToClient({ alert })
   // do not run for custom commands not in commands.ts
   } else if (![
     'commands',
     'uptime',
     'vox',
     'levelup',
-    'vote', 'clashofcode', 'clash'
+    'vote', 'clashofcode', 'clash',
+    'so',
+    'hello'
   ].includes(command)) {
     if (command.charAt(command.length - 1) === '') return // if there's empty space at the end of the string we don't add the command
     client.say(target, `${context.username} this command doesn't exist unfortunately :( can you tell us more so we can add it?`)

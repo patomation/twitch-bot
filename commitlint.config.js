@@ -8,18 +8,27 @@ module.exports = {
       'assets',
       'bot',
       'client',
+      'chat-log-reader',
       'development',
       'docs',
+      'ci',
       'command',
+      'command-marque',
+      'confetti',
+      'controller',
       'eslint',
+      'greeting',
+      'hello',
       'keyword',
       'levelup',
       'logger',
       'overlay',
+      'shoutout',
       'typescript',
       'vote',
       'vox',
-      'uptime'
+      'uptime',
+      'webpack'
     ]]
   }
 }

@@ -2,22 +2,35 @@ import 'dotenv/config'
 import { client } from './modules/client'
 import { upTimeStamp } from './modules/upTime'
 import badWordsRegExp from 'badwords/regexp'
-import vox from './modules/vox'
+import { vox } from './lib/vox'
 import { keywords } from './keywords'
 import { handleCommand } from './lib/handleCommand'
-import { connectOverlay } from './lib/overlayEventSource'
 import { castVote } from './lib/vote'
 import { logger } from './lib/logger'
 import { includesWord } from './lib/includesWord'
 import { getCommands } from './lib/getCommands'
 
+import express from 'express'
+import cors from 'cors'
+
+import { connect } from './api/connect'
+import { triggerCommand } from './api/trigger-command'
+import { getSoundCommands } from './api/get-sound-commands'
+
 upTimeStamp()
 
-connectOverlay()
+const app = express()
+const port = 4001
+app.use(cors())
+  .use(connect)
+  .use(triggerCommand)
+  .use(getSoundCommands)
+  .listen(port, () => {
+    console.log(`CORS-enabled web server listening on port ${port}`)
+  })
 
 client.on('connected', (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`)
-  // vox('beep boop')
 })
 
 client.on('message', (target, context, msg, self) => {
@@ -59,7 +72,16 @@ client.on('message', (target, context, msg, self) => {
       }
     })
   }
-  // Handle Emoticons
+
+  // Handle specific user messages
+  getCommands('@', message).forEach(({ command }) => {
+    const userName = command.toLowerCase()
+    // const userMessage = args.join(' ')
+    if (userName === process.env.BOT_USERNAME) {
+      client.say(target, 'no you')
+    }
+  })
+  // TODO: Handle Emoticons
 })
 
 client.connect()

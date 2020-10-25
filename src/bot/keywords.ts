@@ -78,5 +78,9 @@ export const keywords: Commands = {
       'youre booring',
       'no you'
     ]
+  },
+  vanakkam: {
+    say: 'vanakkam',
+    text: 'vanakkam'
   }
 }

@@ -1,6 +1,31 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
+
+const templateContent = `
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Space Ramen Bot</title>
+    </head>
+    <body>
+    </body>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+      }
+    </style>
+  </html>
+`;
 
 module.exports = {
   mode: 'development',
@@ -10,7 +35,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  plugins: [new HtmlWebpackPlugin(), new ForkTsCheckerWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({ templateContent }),
+    new ForkTsCheckerWebpackPlugin(),
+    new Dotenv()
+  ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     inline: true,

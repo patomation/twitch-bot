@@ -2,7 +2,8 @@ export type Command = {
   text?: string | string[]
   say?: string
   gif?: string
-  sound?: string
+  sound?: string,
+  confetti?: boolean
 }
 
 export type Commands = {
@@ -124,8 +125,93 @@ export const commands: Commands = {
   coolbeans: {
     sound: 'cool-beans.mp3'
   },
-  thalapathy: {
+  alluarjun: { // pronunciation a-ll-u ar-ju-n
     gif: 'thalapathy-floor.gif',
     sound: 'oh-god-im-falling.mp3'
+  },
+  depp: {
+    text: ' I am dishonest, and a dishonest man you can always trust to be dishonest.',
+    say: ' I am dishonest, and a dishonest man you can always trust to be dishonest.'
+  },
+  // TODO thalapathy
+  chattrbox: {
+    sound: 'chattrbox.mp3'
+  },
+  cash: {
+    sound: 'cash.mp3'
+  },
+  drumroll: {
+    sound: 'drumroll.mp3'
+  },
+  failure: {
+    sound: 'failure.mp3'
+  },
+  ragea: {
+    sound: 'ragea.mp3'
+  },
+  tada: {
+    sound: 'tada.mp3'
+  },
+  a: { // Andrelamus's request
+    sound: 'gawr-gura-a.mp3'
+  },
+  vanakkam: {
+    gif: 'vanakkam.gif',
+    say: 'vanakkam'
+  },
+  guerrillakiller: {
+    sound: 'guerrillakillaforilla.mp3',
+    confetti: true
+  },
+  trololo: {
+    sound: 'trololo.mp3'
+  },
+  twat: {
+    sound: 'twat.mp3'
+  },
+  fancycommand: {
+    sound: 'fancycommand.mp3',
+    confetti: true
+  },
+  // TODO: fancypants
+  // TODO: fancyface
+  spaghettihorn: {
+    sound: 'ragea.mp3',
+    say: 'mama mia'
+  },
+  steal: {
+    text: 'good developers borrow, great developers steal',
+    say: 'good developers borrow, great developers steal'
+  },
+  enjoytolive: {
+    sound: 'enjoytolive.mp3',
+    confetti: true
+  },
+  blimey: {
+    gif: 'blimey.gif',
+    sound: 'blimey.mp3'
+  },
+  dontunderstand: {
+    gif: 'john-cleese-no.gif',
+    sound: 'dont-understand.mp3'
+  },
+  bbc: {
+    gif: 'john-cleese-bell.gif',
+    sound: 'bbc-apology.mp3'
+  },
+  secretsignal: {
+    gif: 'secretsignal.gif'
+  },
+  nonsence: {
+    say: 'jib jab wuba luba glub galb'
+  },
+  diskafuti: {
+    sound: 'diskafuti.mp3'
+  },
+  different: {
+    sound: 'completely-different.mp3'
   }
+  // TODO whatishappening
+  // TODO wow
+  // thatwasfun
 }
