@@ -1,8 +1,7 @@
 import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
-import { State, subscribe } from '../store/state'
 import { render } from '../lib/render'
-import { getSoundCommands } from '../store/actions'
+import { host } from '../host'
 
 const marqueCss = `
 .marquee {
@@ -38,7 +37,7 @@ const marqueCss = `
 }
 `
 
-const view = ({ soundCommands }: State): VNode =>
+const view = (soundCommands: string[]): VNode =>
   h('div.marquee', {
     style: {
       color: '#ffffff'
@@ -48,9 +47,8 @@ const view = ({ soundCommands }: State): VNode =>
     h('style', marqueCss)
   ])
 
-export const route = (): void => {
-  subscribe((state) => {
-    render(view(state))
-  })
-  getSoundCommands()
+export const route = async (): Promise<void> => {
+  const response = await fetch(`${host}/get-sound-commands`)
+  const { soundCommands } = await response.json()
+  render(view(soundCommands))
 }

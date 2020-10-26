@@ -2,12 +2,11 @@ import { VNodeStyle } from 'snabbdom/build/package/modules/style'
 import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
 import { voteView } from '../views/vote'
-import { State, subscribeTo } from '../store/state'
+import { subscribe } from '../lib/subscribeToEventSource'
 import { render } from '../lib/render'
 import { playAudio } from '../lib/playAudio'
-import { alertComplete } from '../store/actions'
 
-const alertView = (alertState: State['alert']): VNode =>
+const alertView = (alertState: Alert): VNode =>
   h('div.container', {
     style: {
       position: 'relative',
@@ -29,21 +28,73 @@ const alertView = (alertState: State['alert']): VNode =>
       }) : null
   ])
 
-export const route = (): void => {
-  subscribeTo('alert', async ({ alert }) => {
+let alertQueue: Alert[] = []
+let isPlaying = false
+
+const handleNextAlert = () => {
+  if (!isPlaying && alertQueue.length > 0) {
+    const alert = alertQueue.shift()
     if (alert) {
-      let duration = 1000
-      if (alert && alert.sound) {
-        duration = await playAudio(alert.sound)
-      }
-      // action for when sound duration complete
-      setTimeout(() => {
-        alertComplete()
-      }, duration)
+      isPlaying = true
+      startAlert(alert)
     }
-    render(alertView(alert))
-  })
-  subscribeTo('vote', ({ vote }) => {
-    render(vote ? voteView(vote) : h('div'))
+  }
+}
+
+const playNextAlertNow = () => {
+  const alert = alertQueue.shift()
+  if (alert) {
+    isPlaying = true
+    startAlert(alert)
+  }
+}
+
+/**
+ * When the alert gif / sound stops playing
+ */
+const alertComplete = (): void => {
+  stopAlert()
+  // Start the next thing
+  isPlaying = false
+  handleNextAlert()
+}
+
+const startAlert = async (alert: Alert) => {
+  let duration = 1000
+  if (alert && alert.sound) {
+    duration = await playAudio(alert.sound)
+  }
+  // action for when sound duration complete
+  setTimeout(() => {
+    alertComplete()
+  }, duration)
+  render(alertView(alert))
+}
+
+const stopAlert = () => {
+  render(h('div'))
+}
+
+export const route = (): void => {
+  subscribe(async ({ alert, vote, voteClear }) => {
+    if (alert) {
+      if (alert.override === true) {
+        // TODO stop current sound?
+        alertQueue = [
+          alert,
+          ...alertQueue
+        ]
+        playNextAlertNow()
+      } else {
+        alertQueue.push(alert)
+        handleNextAlert()
+      }
+    }
+
+    if (vote) {
+      render(voteView(vote))
+    } else if (voteClear === true) {
+      render(h('div'))
+    }
   })
 }

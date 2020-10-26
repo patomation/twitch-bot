@@ -1,10 +1,13 @@
 import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
-import { State, subscribe } from '../store/state'
 import { render } from '../lib/render'
-import { controllerButtonClick, getSoundCommands } from '../store/actions'
+import { host } from '../host'
 
-const view = ({ soundCommands }: State): VNode =>
+const controllerButtonClick = (command: string): void => {
+  fetch(`${host}/trigger-command/${command}`)
+}
+
+const view = (soundCommands: string[]): VNode =>
   h('div.controller', {
     style: {
       position: 'relative',
@@ -33,9 +36,8 @@ const view = ({ soundCommands }: State): VNode =>
     }, command.toUpperCase())
   ))
 
-export const route = (): void => {
-  subscribe((state) => {
-    render(view(state))
-  })
-  getSoundCommands()
+export const route = async (): Promise<void> => {
+  const response = await fetch(`${host}/get-sound-commands`)
+  const { soundCommands } = await response.json()
+  render(view(soundCommands))
 }
