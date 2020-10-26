@@ -210,8 +210,11 @@ export const commands: Commands = {
   },
   different: {
     sound: 'completely-different.mp3'
-  }
+  },
   // TODO whatishappening
   // TODO wow
   // thatwasfun
+  raid: {
+    sound: 'raid-siren.mp3'
+  }
 }
