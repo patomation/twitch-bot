@@ -1,6 +1,6 @@
 import { h } from 'snabbdom/build/package/h'
 import { VNode } from 'snabbdom/build/package/vnode'
-import { subscribe } from '../store/state'
+import { subscribe } from '../lib/subscribeToEventSource'
 import { render } from '../lib/render'
 
 const view = (): VNode =>

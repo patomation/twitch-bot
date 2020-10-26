@@ -216,5 +216,8 @@ export const commands: Commands = {
   // thatwasfun
   raid: {
     sound: 'raid-siren.mp3'
+  },
+  confetti: {
+    confetti: true
   }
 }

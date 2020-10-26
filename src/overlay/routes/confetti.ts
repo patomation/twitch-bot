@@ -1,5 +1,5 @@
 import confetti from 'canvas-confetti'
-import { subscribeTo } from '../store/state'
+import { subscribe } from '../lib/subscribeToEventSource'
 
 const triggerFireworkConfetti = () => {
   const duration = 5 * 1000
@@ -25,7 +25,7 @@ const triggerFireworkConfetti = () => {
 }
 
 export const route = (): void => {
-  subscribeTo('alert', ({ alert }) => {
+  subscribe(({ alert }) => {
     if (alert && alert.confetti === true) {
       triggerFireworkConfetti()
     }
