@@ -134,6 +134,12 @@ export const commands: Commands = {
     say: ' I am dishonest, and a dishonest man you can always trust to be dishonest.'
   },
   // TODO thalapathy
+  vijay: {
+    sound: 'vijay-always-be-happy-kutti-story.mp3'
+  },
+  students: {
+    sound: 'students.mp3'
+  },
   chattrbox: {
     sound: 'chattrbox.mp3'
   },
@@ -215,7 +221,8 @@ export const commands: Commands = {
   // TODO wow
   // thatwasfun
   raid: {
-    sound: 'raid-siren.mp3'
+    sound: 'french-police-siren.mp3'
+    // sound: 'raid-siren.mp3' // this one sounds to much like the real thing
   },
   confetti: {
     confetti: true
