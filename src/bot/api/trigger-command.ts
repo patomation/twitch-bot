@@ -11,10 +11,12 @@ export const triggerCommand = app.get('/trigger-command/:name', (req: Request, r
   const alert: Alert = {
     override: true // let controller override things
   }
-  const { sound, gif } = commands[name]
+  const { sound, gif, confetti, background } = commands[name]
   if (sound) alert.sound = readSound(sound)
   if (gif) alert.gif = readGif(gif)
+  if (confetti) alert.confetti = confetti
   if (Object.keys(alert).length > 0) sendToClient({ alert })
+  if (background) sendToClient({ background })
 
   res.writeHead(200)
   res.end()

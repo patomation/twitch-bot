@@ -14,6 +14,13 @@ import { shoutOut } from './shoutout'
 import { hello } from './hello'
 
 export const handleCommand = (command: string, args: string[], target: string, context: Context): void => {
+  console.log('handle command')
+  console.log('handle command')
+  console.log('handle command')
+  console.log('handle command')
+  console.log('handle command')
+  console.log('handle command')
+
   // Help command
   if (command === 'commands') {
     let helpMessage = 'Available Commands: '
@@ -49,7 +56,7 @@ export const handleCommand = (command: string, args: string[], target: string, c
   }
 
   if (Object.prototype.hasOwnProperty.call(commands, command)) {
-    const { text, say, sound, gif, confetti } = commands[command]
+    const { text, say, sound, gif, confetti, background } = commands[command]
 
     // handle text commands
     if (text) {
@@ -70,6 +77,13 @@ export const handleCommand = (command: string, args: string[], target: string, c
     if (gif) alert.gif = readGif(gif)
     if (confetti === true) alert.confetti = true
     if (Object.keys(alert).length > 0) sendToClient({ alert })
+
+    console.log('--------------------------------command')
+
+    console.log({ command })
+
+    if (background) sendToClient({ background })
+
   // do not run for custom commands not in commands.ts
   } else if (![
     'commands',

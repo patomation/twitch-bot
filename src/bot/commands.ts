@@ -3,7 +3,8 @@ export type Command = {
   say?: string
   gif?: string
   sound?: string,
-  confetti?: boolean
+  confetti?: boolean,
+  background?: Background
 }
 
 export type Commands = {
@@ -96,7 +97,11 @@ export const commands: Commands = {
     sound: 're-sucks.mp3'
   },
   our: {
-    sound: 'USSR.mp3'
+    sound: 'USSR.mp3',
+    background: {
+      color: '#e01616',
+      duration: 20000
+    }
   },
   twitch: {
     sound: 'i-love-this-company.mp3'
@@ -226,5 +231,12 @@ export const commands: Commands = {
   },
   confetti: {
     confetti: true
+  },
+  election: {
+    sound: 'trunalimunumaprzure.mp3',
+    gif: 'jim_kerry.gif'
+  },
+  chess: {
+    text: 'Lets Play Chess: https://lichess.org/'
   }
 }
