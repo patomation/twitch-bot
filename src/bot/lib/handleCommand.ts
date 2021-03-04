@@ -82,7 +82,18 @@ export const handleCommand = (command: string, args: string[], target: string, c
 
     console.log({ command })
 
-    if (background) sendToClient({ background })
+    if (background) {
+      const payload = {
+        background: {
+          ...background,
+          // Process background gif into base64 dataurl
+          ...(background.gif ? { gif: readGif(background.gif) } : null),
+          // Process background image into base64 dataurl
+          ...(background.image ? { image: readGif(background.image) } : null)
+        }
+      }
+      sendToClient(payload)
+    }
 
   // do not run for custom commands not in commands.ts
   } else if (![

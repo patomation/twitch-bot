@@ -4,7 +4,7 @@ import { VNode } from 'snabbdom/build/package/vnode'
 import { render } from '../lib/render'
 import { subscribe } from '../lib/subscribeToEventSource'
 
-const view = ({ color }: Background): VNode =>
+const view = ({ color, gif, image }: Background): VNode =>
   h('div.background', {
     style: {
       position: 'relative',
@@ -26,7 +26,11 @@ const view = ({ color }: Background): VNode =>
       style: {
         width: '100%',
         height: '100%',
-        backgroundColor: color
+        backgroundColor: color,
+        ...(gif || image ? {
+          backgroundImage: `url(${gif || image})`,
+          backgroundSize: 'cover'
+        } : null)
       } as unknown as VNodeStyle
     })
   ])
