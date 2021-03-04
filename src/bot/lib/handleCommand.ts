@@ -1,8 +1,8 @@
 import { commands } from '../commands'
-import { readData } from './readData'
-import { writeData } from './writeData'
+// import { readData } from './readData'
+// import { writeData } from './writeData'
 import { client, Context } from '../modules/client'
-import { upTime } from '../modules/upTime'
+// import { upTime } from '../modules/upTime'
 import { vox } from './vox'
 
 import { initiateVote } from './vote'
@@ -110,44 +110,44 @@ export const handleCommand = (command: string, args: string[], target: string, c
     logger('commands_todo', `!${command} command doesn't exist. and was suggested by ${context.username}\nadditional info:\n`)
   }
 
-  interface User {
-    points: number,
-    level: number
-  }
-  interface Users {
-    [key: string]: User
-  }
-  const userModel = {
-    points: 1,
-    level: 0
-  }
-  const xpToLevel = 10
-  if (command === 'levelup') {
-    const dataPath = './data/users.json'
-    const data = readData(dataPath) as Users
-    const user = context.username
+  // interface User {
+  //   points: number,
+  //   level: number
+  // }
+  // interface Users {
+  //   [key: string]: User
+  // }
+  // const userModel = {
+  //   points: 1,
+  //   level: 0
+  // }
+  // const xpToLevel = 10
+  // if (command === 'levelup') {
+  //   const dataPath = './data/users.json'
+  //   const data = readData(dataPath) as Users
+  //   const user = context.username
 
-    // Create or update user keys
-    data[user] = {
-      ...userModel,
-      ...(Object.prototype.hasOwnProperty.call(data, user)
-        ? data[user]
-        : {})
-    }
+  //   // Create or update user keys
+  //   data[user] = {
+  //     ...userModel,
+  //     ...(Object.prototype.hasOwnProperty.call(data, user)
+  //       ? data[user]
+  //       : {})
+  //   }
 
-    data[user].points += 1
+  //   data[user].points += 1
 
-    data[user].level = Math.floor(data[user].points / xpToLevel)
-    const xpRemain = data[user].points - (xpToLevel * data[user].level)
-    const xpToNextLevel = xpToLevel - xpRemain
-    client.say(target, `@${user} gained 1 experience point and has ${data[user].points} total points. Current Level: ${data[user].level}. Only ${xpToNextLevel} points away from Level ${data[user].level + 1} `)
-    writeData(dataPath, data)
-  }
+  //   data[user].level = Math.floor(data[user].points / xpToLevel)
+  //   const xpRemain = data[user].points - (xpToLevel * data[user].level)
+  //   const xpToNextLevel = xpToLevel - xpRemain
+  //   client.say(target, `@${user} gained 1 experience point and has ${data[user].points} total points. Current Level: ${data[user].level}. Only ${xpToNextLevel} points away from Level ${data[user].level + 1} `)
+  //   writeData(dataPath, data)
+  // }
 
-  if (command === 'uptime') {
-    const minutes = upTime()
-    const hours = Math.floor(minutes / 60)
-    const min = Math.round(((minutes / 60) - hours) * 60)
-    client.say(target, `AdVolKit has been streaming for ${hours} hours and ${min} min`)
-  }
+  // if (command === 'uptime') {
+  //   const minutes = upTime()
+  //   const hours = Math.floor(minutes / 60)
+  //   const min = Math.round(((minutes / 60) - hours) * 60)
+  //   client.say(target, `AdVolKit has been streaming for ${hours} hours and ${min} min`)
+  // }
 }

@@ -16,6 +16,7 @@ import cors from 'cors'
 import { connect } from './api/connect'
 import { triggerCommand } from './api/trigger-command'
 import { getSoundCommands } from './api/get-sound-commands'
+import { giveExperiencePoints } from './lib/experiencePoints'
 
 upTimeStamp()
 
@@ -34,6 +35,13 @@ client.on('connected', (addr, port) => {
 })
 
 client.on('message', (target, context, msg, self) => {
+  /**
+   * =========================
+   *  Give gives everyone XP
+   * ========================
+   */
+  giveExperiencePoints(context, target, 1, 0.10) // 9.10 === One Shilling
+
   const message = msg.trim()
   if (self) { return } // Ignore messages from the bot
 
@@ -57,7 +65,6 @@ client.on('message', (target, context, msg, self) => {
     const textMessage = message.replace(badWordsRegExp, '****')
     console.log(`${context.username}: ${textMessage}`)
     logger('chat_log', `${context.username}: ${textMessage}`)
-
     // pick up on keywords
     Object.keys(keywords).forEach((word) => {
       if (includesWord(message, word)) {

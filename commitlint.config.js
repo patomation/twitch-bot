@@ -12,6 +12,7 @@ module.exports = {
       'chat-log-reader',
       'development',
       'docs',
+      'experience-points',
       'ci',
       'command',
       'command-marque',
