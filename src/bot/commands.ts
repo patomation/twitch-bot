@@ -25,7 +25,9 @@ export const commands: Commands = {
     text: 'https://itch.io/jam/jamoween'
   },
   discord: {
-    text: 'https://discord.gg/ttbJuve'
+    text: 'https://discord.gg/ttbJuve',
+    gif: 'join-discord.gif'
+    // sound: 'steve-balmer-developers.mp3'
   },
   freehosting: {
     text: 'https://app.netlify.com'
@@ -206,12 +208,15 @@ export const commands: Commands = {
     gif: 'john-cleese-no.gif',
     sound: 'dont-understand.mp3'
   },
-  bbc: {
-    gif: 'john-cleese-bell.gif',
-    sound: 'bbc-apology.mp3'
-  },
+  // bbc: {
+  //   gif: 'john-cleese-bell.gif',
+  //   sound: 'bbc-apology.mp3'
+  // },
   secretsignal: {
     gif: 'secretsignal.gif'
+  },
+  escape: {
+    sound: 'exape_resets_everything.wav'
   },
   nonsence: {
     say: 'jib jab wuba luba glub galb'
@@ -238,5 +243,83 @@ export const commands: Commands = {
   },
   chess: {
     text: 'Lets Play Chess: https://lichess.org/'
-  }
+  },
+  rock: {
+    gif: 'rock-cat.webp'
+  },
+  snoop: {
+    gif: 'snoop.webp'
+  },
+  loading: {
+    gif: 'loading.webp'
+  },
+  sexy: {
+    gif: 'sexy-squidward.webp'
+  },
+  zest: {
+    gif: 'zest.gif'
+  },
+  eagle: {
+    sound: 'screaming-hawk.mp3',
+    gif: 'eagle.webp',
+    background: {
+      gif: 'american-flag.gif'
+    }
+  },
+  wow: {
+    sound: 'anime-wow.mp3',
+    gif: 'weeb.webp'
+  },
+  magic: {
+    sound: 'magic-wand.mp3',
+    gif: 'firework.webp'
+  },
+  party: {
+    sound: 'party-horn.mp3',
+    gif: 'party-parrot.webp'
+  },
+  applause: {
+    sound: 'laugh-applause.mp3'
+  },
+  boing: {
+    sound: 'boing.mp3',
+    gif: 'delete.webp'
+  },
+  tis: {
+    sound: 'ba-dum-tis.mp3'
+  },
+  villain: {
+    sound: 'sick-villain.mp3'
+  },
+  notlikethis: {
+    gif: 'scared_lego.webp'
+  },
+  run: {
+    sound: 'running-feet.mp3'
+  },
+  quack: {
+    sound: 'quack.mp3',
+    gif: 'yas.webp'
+  },
+  jump: {
+    sound: 'jump.mp3',
+    gif: 'heman.webp'
+  },
+  pew: {
+    sound: 'pew.mp3',
+    gif: 'bemo.webp'
+  },
+  no: { sound: 'anime-no.mp3', gif: 'broney-no.webp' },
+  trash: { sound: 'anime-belongs-in-the-trash.mp3', gif: 'sheep.webp' },
+  eurobeat: { sound: 'eurobeat.mp3', gif: 'lsd-squidward.webp' },
+  scared: { sound: 'anime-scared.mp3', gif: 'scared.webp' },
+  shame: { sound: 'shame.mp3', gif: 'homer.webp' },
+  congrats: { sound: 'congrats.mp3', gif: 'congrats.webp' },
+  giggle: { sound: 'anime-giggle.mp3', gif: 'giggle.webp' },
+  dejavu: { sound: 'deja-vu.mp3', gif: 'drift.webp' },
+  ohyeah: { sound: 'oh-yeah.MP3', gif: 'oh-yeah.webp' },
+  anime: { sound: 'anime-moan-meme.mp3', gif: 'kirby.webp' },
+  nightcore: { sound: 'nightcore.mp3', gif: 'dancing-cat.webp' },
+  punch: { sound: 'strongpunch.mp3', gif: 'punch.webp' },
+  givedamn: { sound: 'dial-up.mp3', gif: 'give-a-damn.webp' }
 }
