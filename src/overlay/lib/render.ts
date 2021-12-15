@@ -1,4 +1,4 @@
-import { VNode } from 'snabbdom/build/package/vnode'
+import { VNode } from 'snabbdom'
 import { patch } from './patch'
 
 const container = document.createElement('div')

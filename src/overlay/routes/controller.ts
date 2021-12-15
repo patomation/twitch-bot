@@ -1,5 +1,4 @@
-import { h } from 'snabbdom/build/package/h'
-import { VNode } from 'snabbdom/build/package/vnode'
+import { h, VNode } from 'snabbdom'
 import { render } from '../lib/render'
 import { host } from '../host'
 

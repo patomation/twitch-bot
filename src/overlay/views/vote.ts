@@ -1,5 +1,4 @@
-import { h } from 'snabbdom/build/package/h'
-import { VNode } from 'snabbdom/build/package/vnode'
+import { h, VNode } from 'snabbdom'
 
 export const voteView = ({
   topic,
@@ -68,36 +67,40 @@ export const voteView = ({
         }, no)
       ])
     ]),
-    time > 0 ? h('div.vote__time', {
-      style: {
-        textAlign: 'right',
-        fontSize: '3rem'
-      }
-    }, [
-      h('span', {
+    time > 0
+      ? h('div.vote__time', {
         style: {
-          fontSize: '80%'
+          textAlign: 'right',
+          fontSize: '3rem'
         }
-      }, 'time left'),
-      h('span', {
+      }, [
+        h('span', {
+          style: {
+            fontSize: '80%'
+          }
+        }, 'time left'),
+        h('span', {
+          style: {
+            // fontSize: '2rem',
+            paddingLeft: '1rem',
+            ...(time < 9 ? { color: 'red' } : null)
+          }
+        }, time),
+        h('span', {
+          style: {
+            fontSize: '50%',
+            ...(time < 9 ? { color: 'red' } : null)
+          }
+        }, 'sec')
+      ])
+      : null,
+    time > 0
+      ? h('div.vote__instructions', {
         style: {
-        // fontSize: '2rem',
-          paddingLeft: '1rem',
-          ...(time < 9 ? { color: 'red' } : null)
+          fontSize: '1.5rem',
+          paddingTop: '1rem',
+          textAlign: 'center'
         }
-      }, time),
-      h('span', {
-        style: {
-          fontSize: '50%',
-          ...(time < 9 ? { color: 'red' } : null)
-        }
-      }, 'sec')
-    ]) : null,
-    time > 0 ? h('div.vote__instructions', {
-      style: {
-        fontSize: '1.5rem',
-        paddingTop: '1rem',
-        textAlign: 'center'
-      }
-    }, 'instructions: chat 1 for yes 2 for no') : null
+      }, 'instructions: chat 1 for yes 2 for no')
+      : null
   ])

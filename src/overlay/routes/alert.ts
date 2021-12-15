@@ -1,6 +1,4 @@
-import { VNodeStyle } from 'snabbdom/build/package/modules/style'
-import { h } from 'snabbdom/build/package/h'
-import { VNode } from 'snabbdom/build/package/vnode'
+import { VNodeStyle, h, VNode } from 'snabbdom'
 import { voteView } from '../views/vote'
 import { subscribe } from '../lib/subscribeToEventSource'
 import { render } from '../lib/render'
@@ -25,7 +23,8 @@ const alertView = (alertState: Alert): VNode =>
           top: '0',
           width: '100%'
         } as unknown as VNodeStyle
-      }) : null
+      })
+      : null
   ])
 
 let alertQueue: Alert[] = []

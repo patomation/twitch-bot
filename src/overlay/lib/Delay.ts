@@ -18,7 +18,7 @@ export default class Delay {
  */
   start (callback: Callback, ms = 1000): void {
     this.cancel()
-    this.timer = setTimeout(callback, ms)
+    this.timer = setTimeout(callback, ms) as unknown as number
   }
 
   cancel (): void {
