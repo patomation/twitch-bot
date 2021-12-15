@@ -1,8 +1,6 @@
-import { h } from 'snabbdom/build/package/h'
-import { VNode } from 'snabbdom/build/package/vnode'
+import { h, VNode, VNodeStyle } from 'snabbdom'
 import { render } from '../lib/render'
 import { host } from '../host'
-import { VNodeStyle } from 'snabbdom/build/package/modules/style'
 
 let state = {
   init: true,

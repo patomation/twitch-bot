@@ -10,6 +10,7 @@ module.exports = {
       'bot',
       'client',
       'chat-log-reader',
+      'deps',
       'development',
       'docs',
       'experience-points',

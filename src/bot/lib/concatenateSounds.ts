@@ -2,7 +2,7 @@ import { exec } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
-export const concatenateSounds = (soundPaths: string[], outPath: string): Promise<string> => new Promise((resolve) => {
+export const concatenateSounds = (soundPaths: string[], outPath: string): Promise<void> => new Promise((resolve) => {
   // Create ffmpeg concat txt instruction file
   const concatFilePath = path.resolve('temp', 'concat.txt')
   soundPaths.forEach((soundPath) => {
