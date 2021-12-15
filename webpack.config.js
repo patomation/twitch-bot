@@ -39,8 +39,8 @@ module.exports = {
     new Dotenv()
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    inline: true,
+    // contentBase: path.join(__dirname, 'dist'),
+    // inline: true,
     port: 4000,
     historyApiFallback: true
   },
