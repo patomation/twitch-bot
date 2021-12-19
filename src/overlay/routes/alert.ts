@@ -8,6 +8,7 @@ const alertView = (alertState: Alert): VNode =>
   h('div.container', {
     style: {
       position: 'relative',
+      background: 'red',
       height: '250px',
       fontFamily: 'Sans-Serif'
     }
@@ -27,54 +28,54 @@ const alertView = (alertState: Alert): VNode =>
       : null
   ])
 
-let alertQueue: Alert[] = []
-let isPlaying = false
+export const getAlertView = (onChange: (next: VNode) => void): VNode => {
+  let alertQueue: Alert[] = []
+  let isPlaying = false
 
-const handleNextAlert = () => {
-  if (!isPlaying && alertQueue.length > 0) {
+  const handleNextAlert = () => {
+    if (!isPlaying && alertQueue.length > 0) {
+      const alert = alertQueue.shift()
+      if (alert) {
+        isPlaying = true
+        startAlert(alert)
+      }
+    }
+  }
+
+  const playNextAlertNow = () => {
     const alert = alertQueue.shift()
     if (alert) {
       isPlaying = true
       startAlert(alert)
     }
   }
-}
 
-const playNextAlertNow = () => {
-  const alert = alertQueue.shift()
-  if (alert) {
-    isPlaying = true
-    startAlert(alert)
+  /**
+   * When the alert gif / sound stops playing
+   */
+  const alertComplete = (): void => {
+    stopAlert()
+    // Start the next thing
+    isPlaying = false
+    handleNextAlert()
   }
-}
 
-/**
- * When the alert gif / sound stops playing
- */
-const alertComplete = (): void => {
-  stopAlert()
-  // Start the next thing
-  isPlaying = false
-  handleNextAlert()
-}
-
-const startAlert = async (alert: Alert) => {
-  let duration = 1000
-  if (alert && alert.sound) {
-    duration = await playAudio(alert.sound)
+  const startAlert = async (alert: Alert) => {
+    let duration = 1000
+    if (alert && alert.sound) {
+      duration = await playAudio(alert.sound)
+    }
+    // action for when sound duration complete
+    setTimeout(() => {
+      alertComplete()
+    }, duration)
+    onChange(alertView(alert))
   }
-  // action for when sound duration complete
-  setTimeout(() => {
-    alertComplete()
-  }, duration)
-  render(alertView(alert))
-}
 
-const stopAlert = () => {
-  render(h('div'))
-}
+  const stopAlert = () => {
+    onChange(h('div'))
+  }
 
-export const route = (): void => {
   subscribe(async ({ alert, vote, voteClear }) => {
     if (alert) {
       if (alert.override === true) {
@@ -91,9 +92,18 @@ export const route = (): void => {
     }
 
     if (vote) {
-      render(voteView(vote))
+      onChange(voteView(vote))
     } else if (voteClear === true) {
-      render(h('div'))
+      onChange(h('div'))
     }
   })
+  return alertView({})
 }
+
+export const route = (): void => {
+  getAlertView((vnode) => {
+    render(vnode)
+  })
+}
+
+export default route

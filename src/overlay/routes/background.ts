@@ -47,3 +47,5 @@ export const route = (): void => {
     }
   })
 }
+
+export default route

@@ -1,18 +1,43 @@
 import { createRouter } from 'routerjs'
-import { route as alertRoute } from './routes/alert'
-import { route as hackBarRoute } from './routes/hack-bar'
-import { route as controllerRoute } from './routes/controller'
-import { route as commandMarque } from './routes/commands-marque'
-import { route as confettiRoute } from './routes/confetti'
-import { route as backgroundRoute } from './routes/background'
+import { VNode, h } from 'snabbdom'
+import { render } from './lib/render'
+import { routes } from './generated/routes'
 
-console.log('henlo?')
+/** NAV */
+const indexView = (): VNode =>
+  h('div.index', {
+    style: {
+      position: 'relative',
+      fontFamily: 'Sans-Serif',
+      color: 'red',
+      width: '100%',
+      background: 'gold',
+      padding: '4em'
+    }
+  }, [
+    h('h3', 'SPACE RAMEN BOT'),
+    h('h1', 'Overlay'),
+    ...routes.map(({ path }) =>
+      h('a', {
+        props: {
+          href: path
+        },
+        style: {
+          display: 'block',
+          textDecoration: 'none'
+        }
+      }, path)
+    )
+  ])
 
-createRouter()
-  .get('/alert', alertRoute)
-  .get('/hack-bar', hackBarRoute)
-  .get('/controller', controllerRoute)
-  .get('/commands-marque', commandMarque)
-  .get('/confetti', confettiRoute)
-  .get('/background', backgroundRoute)
-  .run()
+const main = async () => {
+  const router = createRouter()
+  await Promise.all([
+    { path: '', view: () => render(indexView()) },
+    ...routes
+  ].map(async ({ path, view }) => {
+    router.get(path, view)
+  }))
+  router.run()
+}
+main()

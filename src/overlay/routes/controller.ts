@@ -40,3 +40,5 @@ export const route = async (): Promise<void> => {
   const { soundCommands } = await response.json()
   render(view(soundCommands))
 }
+
+export default route
