@@ -19,7 +19,7 @@
     "unit": "ava",
     "test": "run-s lint build build:test unit",
     "coverage": "nyc ava",
-    "prepare": "husky install",
+    "prepare": "husky install && node ./scripts/generate-overlay-routes.js",
     "release": "standard-version"
   },
   "ava": {

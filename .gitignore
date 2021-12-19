@@ -11,3 +11,4 @@ data
 *.txt
 logs
 temp
+generated
