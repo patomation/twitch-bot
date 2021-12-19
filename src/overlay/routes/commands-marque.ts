@@ -2,43 +2,53 @@ import { h, VNode, VNodeStyle } from 'snabbdom'
 import { render } from '../lib/render'
 import { host } from '../host'
 
-let state = {
-  init: true,
-  soundCommands: [],
-  showFirst: true,
-  showSecond: false,
-  containerWidth: 1000, // needs to have some sort of default starting width
-  contentWidth: 3000 // needs to have some sort of default starting width
+interface Callbacks {
+  onTransitionEnd?: () => void,
+  onContainerInsert?: (width: number) => void,
+  onContentInsert?: (width: number) => void
+}
+interface State {
+  init: boolean
+  soundCommands: string[],
+  showFirst: boolean,
+  showSecond: boolean,
+  containerWidth: number,
+  contentWidth: number,
+  width: number
 }
 
-const handleFirstTransitionEnd = () => {
-  state.showFirst = false
-  state.showSecond = true
-  render(view(state))
-}
+const SPEED = 100
 
-const handleSecondTransitionEnd = () => {
-  state.showSecond = false
-  state.showFirst = true
-  render(view(state))
-}
+const getView = ({
+  onTransitionEnd,
+  onContainerInsert,
+  onContentInsert
+}: Callbacks) => ({
+  soundCommands,
+  showFirst,
+  showSecond,
+  containerWidth,
+  contentWidth
+}: State): VNode => {
+  const handleContainerInsert = (vnode: VNode): void => {
+    if (onContainerInsert) {
+      onContainerInsert((vnode.elm as HTMLElement).offsetWidth)
+    }
+  }
 
-const handleContainerInsert = (vnode: VNode): void => {
-  state.containerWidth = (vnode.elm as HTMLElement).offsetWidth
-}
+  const handleContentInsert = (vnode: VNode): void => {
+    if (onContentInsert) {
+      onContentInsert((vnode.elm as HTMLElement).offsetWidth)
+    }
+  }
 
-const handleContentInsert = (vnode: VNode): void => {
-  state.contentWidth = (vnode.elm as HTMLElement).offsetWidth
-}
-
-const speed = 100
-
-const view = ({ soundCommands, showFirst, showSecond, containerWidth, contentWidth }: typeof state): VNode =>
-  h('div.marquee', {
+  return h('div.marquee', {
     hook: { insert: handleContainerInsert },
     style: {
       color: '#ffffff',
-      fontSize: '2.5rem'
+      background: 'gold',
+      fontSize: '2.5rem',
+      height: '50px'
     }
   }, [
     showFirst
@@ -46,16 +56,22 @@ const view = ({ soundCommands, showFirst, showSecond, containerWidth, contentWid
         style: {
           position: 'absolute',
           right: `${-contentWidth}px`,
-          transition: `right linear ${contentWidth / speed}s`,
+          transition: `right linear ${contentWidth / SPEED}s`,
           delayed: {
             right: '0px'
           },
           remove: {
-            transition: `right linear ${containerWidth / speed}s`,
+            transition: `right linear ${containerWidth / SPEED}s`,
             right: `${containerWidth}px`
           }
         } as unknown as VNodeStyle,
-        on: { transitionend: handleFirstTransitionEnd },
+        on: {
+          ...(onTransitionEnd
+            ? {
+                transitionend: onTransitionEnd
+              }
+            : null)
+        },
         hook: { insert: handleContentInsert }
       }, soundCommands.map((command) =>
         h('span', { style: { padding: '0 1rem' } }, `!${command}`)))
@@ -65,25 +81,66 @@ const view = ({ soundCommands, showFirst, showSecond, containerWidth, contentWid
         style: {
           position: 'absolute',
           right: `-${contentWidth}px`,
-          transition: `right linear ${contentWidth / speed}s`,
+          transition: `right linear ${contentWidth / SPEED}s`,
           delayed: {
             right: '0px'
           },
           remove: {
-            transition: `right linear ${containerWidth / speed}s`,
+            transition: `right linear ${containerWidth / SPEED}s`,
             right: `${containerWidth}px`
           }
         } as unknown as VNodeStyle,
-        on: { transitionend: handleSecondTransitionEnd },
+        on: {
+          ...(onTransitionEnd
+            ? {
+                transitionend: onTransitionEnd
+              }
+            : null)
+        },
         hook: { insert: handleContentInsert }
       }, soundCommands.map((command) =>
         h('span', { style: { padding: '0 1rem' } }, `!${command}`)))
       : null
   ])
+}
 
-export const route = async (): Promise<void> => {
+const state: State = {
+  init: true,
+  soundCommands: [],
+  showFirst: true,
+  showSecond: false,
+  containerWidth: 1000, // needs to have some sort of default starting width
+  contentWidth: 3000, // needs to have some sort of default starting width
+  width: 1000
+}
+
+const getSoundCommands = async () => {
   const response = await fetch(`${host}/get-sound-commands`)
   const { soundCommands } = await response.json()
-  state = { ...state, soundCommands }
-  render(view(state))
+  return soundCommands
 }
+
+export const getMarqueViewWithState = async (nextView?: (v: VNode) => void): Promise<VNode> => {
+  state.soundCommands = await getSoundCommands()
+  const view = getView({
+    onContainerInsert: (width) => { state.containerWidth = width },
+    onContentInsert: (width) => { state.contentWidth = width },
+    onTransitionEnd: () => {
+      state.showFirst = !state.showFirst
+      state.showSecond = !state.showSecond
+      if (nextView) {
+        nextView(view(state))
+      }
+    }
+  })
+  return view(state)
+}
+
+export const route = async (): Promise<void> => {
+  const view = await getMarqueViewWithState((nextView) => {
+    render(nextView)
+  })
+  render(view)
+}
+
+export default route

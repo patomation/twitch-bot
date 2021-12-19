@@ -2,7 +2,8 @@
   "extends": "tsconfigs/browser-executable",
   "compilerOptions": {
     "outDir": "../../build/overlay",
-    "types": ["dotenv-webpack"]
+    "types": ["dotenv-webpack"],
+    "noEmit": false
   },
   "include": [
     "**/*.ts",

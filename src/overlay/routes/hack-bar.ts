@@ -8,7 +8,7 @@ const view = (): VNode =>
       position: 'relative',
       height: '250px',
       fontFamily: 'Sans-Serif',
-      color: '#fff'
+      color: 'red'
     }
   }, [
     h('div.hack__title', 'Warning, stream hacking in progress...')
@@ -20,3 +20,5 @@ export const route = (): void => {
   })
   render(view())
 }
+
+export default route
