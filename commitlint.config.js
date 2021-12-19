@@ -27,6 +27,7 @@ module.exports = {
       'logger',
       'overlay',
       'shoutout',
+      "scripts",
       'typescript',
       'vote',
       'vox',
