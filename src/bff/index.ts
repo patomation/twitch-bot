@@ -17,6 +17,7 @@ import { connect } from './api/connect'
 import { triggerCommand } from './api/trigger-command'
 import { getSoundCommands } from './api/get-sound-commands'
 import { giveExperiencePoints } from './lib/experiencePoints'
+import getVersion from './api/get-version'
 
 upTimeStamp()
 
@@ -26,6 +27,7 @@ app.use(cors())
   .use(connect)
   .use(triggerCommand)
   .use(getSoundCommands)
+  .use(getVersion)
   .listen(port, () => {
     console.log(`CORS-enabled web server listening on port ${port}`)
   })

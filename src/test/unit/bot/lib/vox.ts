@@ -2,8 +2,8 @@ import test from 'ava'
 import fs from 'fs'
 import path from 'path'
 
-import { prepareTempFolder } from '../../../../bot/lib/prepareTempFolder'
-import { voxToFile } from '../../../../bot/lib/vox'
+import { prepareTempFolder } from '../../../../bff/lib/prepareTempFolder'
+import { voxToFile } from '../../../../bff/lib/vox'
 
 test('voxToFile', async (t) => {
   prepareTempFolder()

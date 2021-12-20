@@ -1,7 +1,7 @@
 {
   "extends": "tsconfigs/nodejs-executable",
   "compilerOptions": {
-    "outDir": "../../build/bot",
+    "outDir": "../../build/bff",
     "composite": true
   },
   "include": [

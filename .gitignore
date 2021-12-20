@@ -3,6 +3,7 @@ dist
 .nyc_output
 coverage
 *\ copy*
+*.swp
 .~lock.*.ods#
 .env
 data.json
@@ -11,3 +12,4 @@ data
 *.txt
 logs
 temp
+generated

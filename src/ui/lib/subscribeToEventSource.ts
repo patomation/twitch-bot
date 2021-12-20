@@ -1,4 +1,6 @@
 import { host } from '../host'
+import { View } from '../types/View'
+import { render } from './render'
 
 export const subscribe = (callback: (data: Data) => void): void => {
   const eventSource = new EventSource(`${host}/connect`)
@@ -7,4 +9,13 @@ export const subscribe = (callback: (data: Data) => void): void => {
     console.log('message', { data })
     callback(data)
   }
+}
+
+export const subscribeAndRender = (
+  view: View
+) => (): void => {
+  subscribe((data) => {
+    render(view(data))
+  })
+  render(view())
 }

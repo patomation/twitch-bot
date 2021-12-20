@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { shoutOut } from '../../../../bot/lib/shoutout'
+import { shoutOut } from '../../../../bff/lib/shoutout'
 import { getMessage, getTarget } from '../../../mocks/tmi'
 
 test('shout out user with @ prefix', (t) => {

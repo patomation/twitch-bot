@@ -61,7 +61,7 @@ see `CONTRIBUTIN.md`
 ### How to add Sound Commands
 1. Adds sound mp3 to `assts/sounds`
 2. Add gif animation to `assets/gif`
-3. in `src/overlay/commands.ts` add imports to bots gif and mp3 on a new lines together
+3. in `src/ui/commands.ts` add imports to bots gif and mp3 on a new lines together
 4. Create a new key object on the commands object example
 ```
 ...
@@ -79,7 +79,7 @@ export const commands = {
 ```
 
 ### How to add other types of commands
-1. Edit `src/bot/commands.ts` or `src/bot/keywords.ts`
+1. Edit `src/bff/commands.ts` or `src/bff/keywords.ts`
 the `commands.ts` is for regular !commands
 keywords are any words in chat that you want the bot to respond to
 2. append the `command` or `keyword` object with a new object like so

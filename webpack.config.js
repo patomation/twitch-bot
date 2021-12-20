@@ -21,6 +21,7 @@ const templateContent = `
       }
       body {
         height: 100%;
+        background: #2A3439;
       }
     </style>
   </html>
@@ -29,7 +30,7 @@ const templateContent = `
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './build/overlay/overlay.js',
+  entry: './build/ui/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -47,7 +48,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|mp3)$/i,
+        test: /\.(png|jpe?g|gif|mp3|map|json)$/i,
         use: [
           {
             loader: 'file-loader'
