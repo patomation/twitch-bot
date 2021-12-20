@@ -3,7 +3,7 @@ const path = require('path')
 
 console.log('GENERATING ROUTES FILE')
 
-const routes = fs.readdirSync(path.resolve(__dirname, '../src/overlay/routes'))
+const routes = fs.readdirSync(path.resolve(__dirname, '../src/ui/routes'))
   .map((name) => name.split('.')[0])
 
 const content = `
@@ -18,7 +18,7 @@ export const routes = [
 ]
 
 `
-const GENERATED_DIR = path.resolve(__dirname, '../src/overlay/generated')
+const GENERATED_DIR = path.resolve(__dirname, '../src/ui/generated')
 if (!fs.existsSync(GENERATED_DIR)) {
   fs.mkdirSync(GENERATED_DIR)
 }

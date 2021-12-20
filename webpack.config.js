@@ -29,7 +29,7 @@ const templateContent = `
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './build/overlay/overlay.js',
+  entry: './build/ui/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'

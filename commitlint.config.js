@@ -25,7 +25,7 @@ module.exports = {
       'keyword',
       'levelup',
       'logger',
-      'overlay',
+      'ui',
       'shoutout',
       'scripts',
       'typescript',
