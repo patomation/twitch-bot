@@ -21,6 +21,7 @@ const templateContent = `
       }
       body {
         height: 100%;
+        background: #2A3439;
       }
     </style>
   </html>
