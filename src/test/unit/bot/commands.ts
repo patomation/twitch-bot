@@ -2,7 +2,7 @@ import test from 'ava'
 import fs from 'fs'
 import path from 'path'
 
-import { commands } from '../../../bot/commands'
+import { commands } from '../../../bff/commands'
 
 test('validate sounds to make sure they exist', (t) => {
   const totalSoundCommands = Object.keys(commands)

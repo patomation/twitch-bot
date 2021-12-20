@@ -1,5 +1,5 @@
 import test from 'ava'
-import { includesWord } from '../../../../bot/lib/includesWord'
+import { includesWord } from '../../../../bff/lib/includesWord'
 
 const data = [
   {

@@ -1,5 +1,5 @@
 import test from 'ava'
-import { getCommands } from '../../../../bot/lib/getCommands'
+import { getCommands } from '../../../../bff/lib/getCommands'
 
 const data = [
   {

@@ -7,7 +7,7 @@ module.exports = {
     'scope-enum': [2, 'always', [
       'assets',
       'background',
-      'bot',
+      'bff',
       'client',
       'chat-log-reader',
       'deps',

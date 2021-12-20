@@ -79,7 +79,7 @@ export const commands = {
 ```
 
 ### How to add other types of commands
-1. Edit `src/bot/commands.ts` or `src/bot/keywords.ts`
+1. Edit `src/bff/commands.ts` or `src/bff/keywords.ts`
 the `commands.ts` is for regular !commands
 keywords are any words in chat that you want the bot to respond to
 2. append the `command` or `keyword` object with a new object like so

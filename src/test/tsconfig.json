@@ -16,7 +16,7 @@
   ],
   "references": [
     {
-      "path": "../bot/tsconfig.json"
+      "path": "../bff/tsconfig.json"
     }
   ]
 }
