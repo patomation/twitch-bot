@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.0](https://github.com/patomation/twitch-bot/compare/v1.0.0...v2.0.0-beta.0) (2021-12-20)
+
+
+### Features
+
+* **development:** track .vscode config with red theme ([9fa68e1](https://github.com/patomation/twitch-bot/commit/9fa68e1ecfe8b5692fa2ee87069906e63a259534))
+* **overlay:** adds layout route ([1930c7d](https://github.com/patomation/twitch-bot/commit/1930c7dfd8e292edc303f1c7c50d7caba3270f21))
+* **overlay:** route ui view refactor and improvement ([4fed9a8](https://github.com/patomation/twitch-bot/commit/4fed9a8e9df32688d6c895aa4fbb297605a26e9f))
+* **scripts:** added script to generate route imports so I dont have to edit the file all the time ([3ba3941](https://github.com/patomation/twitch-bot/commit/3ba39416d504ac034d23f7f298c8daeecf172d49))
+
 ## 1.0.0 (2021-12-20)
 
 
