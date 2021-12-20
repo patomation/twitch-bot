@@ -8,6 +8,7 @@ module.exports = {
       'assets',
       'background',
       'bff',
+      'bff-api-get-version',
       'client',
       'chat-log-reader',
       'deps',
